@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<table>
+    <tr>
+        <th>Tipo Prestamo</th>
+        <th>Fecha</th>
+        <th>Total</th>
+    </tr>
+    {% for prestamo in prestamos %}
+        <tr>
+            <td>{{ prestamo.loan_type }}</td>
+            <td>{{ prestamo.loan_date }}</td>
+            <td>{{ prestamo.loan_total }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

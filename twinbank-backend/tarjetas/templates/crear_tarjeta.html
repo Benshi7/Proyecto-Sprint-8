@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Crear Tarjeta para {{ cliente.customer_name }}</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Crear Tarjeta</button>
+</form>
+{% endblock %}
+
+
+<!-- {{ form.card_id }}
+Card Number: {{ form.card_number }}
+CVV: {{ form.cvv }}
+Issuance Date: {{ form.issuance_date }}
+Expiration Date: {{ form.expiration_date }}
+Card Type: {{ form.card_type }}
+Marca: {{ form.marcaid }}
+{{ form.customer }} -->

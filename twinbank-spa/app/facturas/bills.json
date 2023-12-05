@@ -1,0 +1,97 @@
+[
+  {
+    "cliente": {
+      "direccion": "123 Calle Principal, Ciudad A",
+      "nombre": "Cliente A"
+    },
+    "descripcion": "Factura de consumo eléctrico del mes de septiembre.",
+    "fecha": "2023-10-01",
+    "id": 1,
+    "productos": [
+      {
+        "cantidad": 30,
+        "nombre": "Electricidad",
+        "precio_unitario": 50.00,
+        "subtotal": 5500.00
+      }
+    ],
+    "titulo": "Factura de Luz",
+    "total": 15000.00
+  },
+  {
+    "cliente": {
+      "direccion": "456 Calle Secundaria, Ciudad B",
+      "nombre": "Cliente B"
+    },
+    "descripcion": "Factura de consumo de gas del mes de septiembre.",
+    "fecha": "2023-10-02",
+    "id": 2,
+    "productos": [
+      {
+        "cantidad": 40,
+        "nombre": "Gas Natural",
+        "precio_unitario": 20.00,
+        "subtotal": 800.00
+      }
+    ],
+    "titulo": "Factura de Gas",
+    "total": 800.00
+  },
+  {
+    "cliente": {
+      "direccion": "789 Calle Principal, Ciudad C",
+      "nombre": "Cliente C"
+    },
+    "descripcion": "Factura de consumo de agua del mes de septiembre.",
+    "fecha": "2023-10-03",
+    "id": 3,
+    "productos": [
+      {
+        "cantidad": 25,
+        "nombre": "Agua Potable",
+        "precio_unitario": 10.00,
+        "subtotal": 250.00
+      }
+    ],
+    "titulo": "Factura de Agua",
+    "total": 2500.00
+  },
+  {
+    "cliente": {
+      "direccion": "321 Calle Principal, Ciudad D",
+      "nombre": "Cliente D"
+    },
+    "descripcion": "Factura de consumo de internet del mes de septiembre.",
+    "fecha": "2023-10-04",
+    "id": 4,
+    "productos": [
+      {
+        "cantidad": 1,
+        "nombre": "Internet",
+        "precio_unitario": 500.00,
+        "subtotal": 500.00
+      }
+    ],
+    "titulo": "Factura de Internet",
+    "total": 5000.00
+  },
+  {
+    "cliente": {
+      "direccion": "987 Calle Principal, Ciudad E",
+      "nombre": "Cliente E"
+    },
+    "descripcion": "Factura del curso de Full Stack.",
+    "fecha": "2023-10-05",
+    "id": 5,
+    "productos": [
+      {
+        "cantidad": 50,
+        "nombre": "Prepaga",
+        "precio_unitario": 20.00,
+        "subtotal": 4000.00
+      }
+    ],
+    "titulo": "Factura de ITBA",
+    "total": 40000.00
+  }
+]

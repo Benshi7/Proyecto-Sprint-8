@@ -1,0 +1,174 @@
+[
+  {
+    "card": {
+      "id": "1",
+      "number": "1234 5678 9000 1234",
+      "valid": "12/24",
+      "signature": "",
+      "seccode": "123",
+      "type": "visa",
+      "gradient": "radial-gradient(circle at top left, #c3ec52 0%, #0ba29d 100%)",
+      "transactions": [
+        {
+          "id": "1",
+          "detail": "Compra en línea",
+          "date": "2023-10-02",
+          "price": "$5.000,00",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "detail": "Retiro en cajero",
+          "date": "2023-10-03",
+          "price": "$8.000,00",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "detail": "Pago de factura",
+          "date": "2023-10-05",
+          "price": "$3.600,00",
+          "status": "completed"
+        },
+        {
+          "id": "4",
+          "detail": "Compra en tienda local",
+          "date": "2023-10-08",
+          "price": "$6.150,00",
+          "status": "completed"
+        },
+        {
+          "id": "5",
+          "detail": "Transferencia a otro banco",
+          "date": "2023-10-10",
+          "price": "$7.500,00",
+          "status": "completed"
+        },
+        {
+          "id": "6",
+          "detail": "Pago de tarjeta de crédito",
+          "date": "2023-10-15",
+          "price": "$9.500,00",
+          "status": "completed"
+        }
+      ]
+    }
+  },
+  {
+    "card": {
+      "id": "2",
+      "number": "5678 1234 9876 5432",
+      "valid": "05/23",
+      "signature": "",
+      "seccode": "456",
+      "type": "mastercard",
+      "gradient": "radial-gradient(circle at top left, rgba(91, 36, 122, 1) 0%, rgba(27, 206, 223, 1) 100%)",
+      "transactions": [
+        {
+          "id": "1",
+          "detail": "Compra en línea",
+          "date": "2023-10-01",
+          "price": "$4.500,00",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "detail": "Retiro en cajero",
+          "date": "2023-10-04",
+          "price": "$8.000,00",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "detail": "Pago en restaurante",
+          "date": "2023-10-06",
+          "price": "$6.800,00",
+          "status": "completed"
+        },
+        {
+          "id": "4",
+          "detail": "Compra en supermercado",
+          "date": "2023-10-09",
+          "price": "$7.100,00",
+          "status": "completed"
+        },
+        {
+          "id": "5",
+          "detail": "Pago de factura",
+          "date": "2023-10-11",
+          "price": "$2.500,00",
+          "status": "completed"
+        },
+        {
+          "id": "6",
+          "detail": "Transferencia a amigo",
+          "date": "2023-10-13",
+          "price": "$4.000,00",
+          "status": "completed"
+        },
+        {
+          "id": "7",
+          "detail": "Compra en línea",
+          "date": "2023-10-16",
+          "price": "$8.500,00",
+          "status": "completed"
+        }
+      ]
+    }
+  },
+  {
+    "card": {
+      "id": "3",
+      "number": "9876 5432 2100 7890",
+      "valid": "09/25",
+      "signature": "",
+      "seccode": "789",
+      "type": "visa",
+      "gradient": "radial-gradient(circle at top left, #F36265 0%, #961276 100%)",
+      "transactions": [
+        {
+          "id": "1",
+          "detail": "Compra en línea",
+          "date": "2023-10-01",
+          "price": "$5.500,00",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "detail": "Pago de factura",
+          "date": "2023-10-04",
+          "price": "$3.500,00",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "detail": "Compra en tienda local",
+          "date": "2023-10-07",
+          "price": "$8.500,00",
+          "status": "completed"
+        },
+        {
+          "id": "4",
+          "detail": "Transferencia a otro banco",
+          "date": "2023-10-09",
+          "price": "$7.000,00",
+          "status": "completed"
+        },
+        {
+          "id": "5",
+          "detail": "Pago de factura",
+          "date": "2023-10-12",
+          "price": "$4.500,00",
+          "status": "completed"
+        },
+        {
+          "id": "6",
+          "detail": "Compra en línea",
+          "date": "2023-10-14",
+          "price": "$15.000,00",
+          "status": "completed"
+        }
+      ]
+    }
+  }
+]

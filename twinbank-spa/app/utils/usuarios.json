@@ -1,0 +1,44 @@
+[
+  {
+    "fotoUrl": "https://i.imgur.com/EBOatbw.jpg",
+    "id": 1,
+    "password": "bruno123",
+    "saldo": 58693,
+    "username": "Bruno"
+  },
+  {
+    "fotoUrl": "https://i.imgur.com/zwZuFTe.jpg",
+    "id": 2,
+    "password": "rodrigo123",
+    "saldo": 75021,
+    "username": "Rodrigo"
+  },
+  {
+    "fotoUrl": "https://i.imgur.com/RlLwHCR.jpg",
+    "id": 3,
+    "password": "constanza123",
+    "saldo": 65921,
+    "username": "Constanza"
+  },
+  {
+    "fotoUrl": "https://i.imgur.com/mSXIBPm.jpg",
+    "id": 4,
+    "password": "tomas123",
+    "saldo": 72033,
+    "username": "Tomas"
+  },
+  {
+    "fotoUrl": "https://i.imgur.com/MYOUd94.jpg",
+    "id": 5,
+    "password": "agustin123",
+    "saldo": 59400,
+    "username": "Agustin"
+  },
+  {
+    "fotoUrl": "https://i.imgur.com/Y7PJdJh.jpg",
+    "id": 6,
+    "password": "nicolas123",
+    "saldo": 75400,
+    "username": "Nicolas"
+  }
+]

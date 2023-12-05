@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Lista de Tarjetas del Cliente {{ cliente.customer_name }}</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tipo</th>
+        <th>Número</th>
+        <th>Fecha de Emisión</th>
+        <th>Fecha de Expiración</th>
+        <th>Marca</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tarjeta in tarjetas %}
+        <tr>
+          <td>{{ tarjeta.card_id }}</td>
+          <td>{{ tarjeta.card_type }}</td>
+          <td>{{ tarjeta.card_number }}</td>
+          <td>{{ tarjeta.issuance_date }}</td>
+          <td>{{ tarjeta.expiration_date }}</td>
+          <td>{{tarjeta.marcaid}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

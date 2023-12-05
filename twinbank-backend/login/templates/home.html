@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>Inicio</title>
+</head>
+<body>
+    <h2>Bienvenido a ITBANK</h2>
+    {% if user.is_authenticated %}
+        <p>Hola {{user.username}}</p>
+        <p><a href="{% url 'logout' %}">Cerrar Sesión</a></p>
+    {% else %}
+        <p><a href="{% url 'login' %}">Iniciar Sesión</a></p>
+        <p><a href="{% url 'register' %}">Registrar Cliente Existente</a></p>
+        <p><a href="{% url 'register_new' %}">Registrar Cliente Nuevo</a></p>
+    {% endif %}
+    <h2><a href="{% url 'cliente_list' %}">Lista de Clientes</a></h2>
+</body>
+</html>

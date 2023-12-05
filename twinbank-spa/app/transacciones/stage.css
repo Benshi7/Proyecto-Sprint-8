@@ -1,0 +1,16 @@
+.tabla-transferencia {
+    border-collapse: collapse;
+    border: 2px solid #ddd;
+    margin: 0 auto;
+    padding: 10px;
+  }
+  
+  .tabla-transferencia th, .tabla-transferencia td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .tabla-transferencia th {
+    text-align: left;
+    background-color: #f2f2f2;
+  }

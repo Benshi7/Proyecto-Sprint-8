@@ -1,0 +1,27 @@
+
+
+{% extends 'base.html' %}
+{% block content %}
+
+
+<h2>Lista de Cuentas de {{ cliente.customer_name }}</h2>
+<p>Clickea en el id de cada cuenta para ver sus movimientos</p>
+<table>
+  <tr>
+    <th>Cuenta</th>
+    <th>Saldo</th>
+    <th>IBAN</th>
+    <th>Tipo de Cuenta</th>
+  </tr>
+  {% for cuenta in cuentas %}
+  <tr>
+    <td><a href="{% url 'movimientos_detail' cliente_id=cliente.customer_id cuenta_id=cuenta.account_id%}"># {{ cuenta.account_id }}</a></td>
+    <td>$ {{ cuenta.balance }}</td>
+    <td>{{ cuenta.iban }}</td>
+    <td>{{ cuenta.tipo_cuenta }}</td>
+  </tr>
+  {% endfor %}
+</table>
+<br>
+<a href="{% url 'cliente_detail' cliente_id=cliente.customer_id %}">Volver</a>
+{% endblock %}

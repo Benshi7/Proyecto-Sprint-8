@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>Login Usermarket</title>
+</head>
+<body>
+    <h2>Login User</h2>
+    <a href="{% url 'home' %}">Volver</a>
+    <br>
+    <br>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="fieldWrapper">
+          <label for="{{ form.username.id_for_label }}">Usuario:</label>
+          {{ form.username }}
+        </div>
+        <br>
+        <div class="fieldWrapper">
+          <label for="{{ form.password1.id_for_label }}">Contraseña:</label>
+          {{ form.password }}
+        </div>
+        <br>
+        <button type="submit">Iniciar Sesión</button>
+      </form>
+</body>
+</html>

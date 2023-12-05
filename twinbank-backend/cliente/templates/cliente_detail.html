@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Detalles del Cliente</h2>
+  <p><strong>ID:</strong> {{ cliente.customer_id }}</p>
+  <p><strong>Nombre:</strong> {{ cliente.customer_name }}</p>
+  <p><strong>Apellido:</strong> {{ cliente.customer_surname }}</p>
+  <p><strong>Dni:</strong> {{cliente.customer_dni}} </p>
+  <p><strong>Tipo de Cliente:</strong> {{ cliente.tipoclienteid }}</p>
+  <p><strong>Fecha de Nacimiento:</strong> {{ cliente.dob }}</p>
+  <h3>Cuentas Bancarias</h3>
+  <p><a href="{% url 'lista_cuentas' cliente_id=cliente.customer_id %}">Ver lista de Cuentas Bancarias</a></p>
+    <p><a href="{% url 'crear_cuenta_bancaria' cliente_id=cliente.customer_id %}">Crear Nueva Cuenta Bancaria</a></p>
+
+  <h3>Tarjetas</h3>
+  <p><a href="{% url 'tarjetas_detail' cliente_id=cliente.customer_id %}">Ver lista de Tarjetas</a></p>
+  <p><a href="{% url 'crear_tarjeta' cliente_id=cliente.customer_id %}">Crear Nueva Tarjeta</a></p>
+
+  <h3>Prestamos</h3>
+  <p><a href="{%url 'solicitud_prestamo' cliente_id=cliente.customer_id%}">Pedir prestamo</a></p>
+  <p><a href="{%url 'listar_prestamos' cliente_id=cliente.customer_id%}">Listar Prestamos</a></p>
+
+{% endblock %}

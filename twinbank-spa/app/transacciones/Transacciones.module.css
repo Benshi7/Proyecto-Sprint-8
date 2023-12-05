@@ -1,0 +1,170 @@
+
+.input-container {
+  max-width: 400px; /* Ancho máximo para el contenedor */
+  margin: 0 auto; /* Centrar horizontalmente */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar elementos verticalmente */
+  padding: 10px;
+}
+
+.input-content input[type="text"],.input-content input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+}
+
+.input-content input[type="text"]:focus, .input-content input[type="number"]:focus{
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.input-content input[type="number"] {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Estilos adicionales según tu preferencia */
+/* Por ejemplo, cambiar el color de fondo y el color del texto */
+.input-content input[type="text"] {
+  background-color: #f4f4f4;
+  color: #333;
+}
+.input-content input[type="number"] {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.input-content label {
+  margin-bottom: 10px; /* Espacio entre el label y el input */
+}
+
+.transferencia {
+  margin-top: 1rem;
+  width: auto;
+}
+/* Contenedor de trasferencias */
+.container {
+  padding: 24px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  color: #000;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 16px;
+ background: rgb(240, 240, 240);
+border-radius: 16px;
+border: 1px solid rgba(255, 255, 255, 0.46);
+}
+/* Saldo de la cuenta */
+.balance-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.account-balance {
+  font-size: 36px;
+  font-weight: bold;
+}
+/* Movimientos de la cuenta */
+.movements-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.clear-button {
+  background-color: #ff5555;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.clear-button:hover {
+  background-color: #ff3333;
+}
+
+/* Futura tabla de movimientos*/
+.movements-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.movements-table th,
+.movements-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #444;
+  text-align: left;
+}
+
+.table-header {
+  font-weight: bold;
+}
+
+.amount-input {
+  width: 90%;
+  padding: 8px;
+  background-color: whitesmoke;
+  color: black; /* Texto en color negro */
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+#cbu,
+#monto{
+  color: #000;
+  width: 100%;
+  text-align: center;
+  background-color: white;
+  border: none;
+  margin-top: 0;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 9px;
+}
+
+/* Botones  */
+.add-button,
+.withdraw-button {
+  background-color: #034975; /* Color de fondo azul */
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 12px;
+}
+
+.add-button:hover,
+.withdraw-button:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s;
+}
+
+.fontawesome {
+  padding-left: 1rem;
+}
+
+.container_submit {
+  text-align: center;
+}
+@media screen and (max-width: 375px) {
+ .movements-header{
+  display: flex;
+  flex-direction: column;
+ }
+
+ .clear-button{
+  margin-top: 10px;
+
+ }
+
+
+}

@@ -1,0 +1,35 @@
+.factura {
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.factura h2 {
+  margin: 0;
+}
+
+.factura p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.factura ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.factura li {
+  margin-bottom: 5px;
+}
+
+.factura li span {
+  font-weight: bold;
+}
+
+.factura p.total {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}

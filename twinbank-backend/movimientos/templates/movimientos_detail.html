@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Lista de Movimientos de la Cuenta #{{cuenta.account_id}} de {{cliente.customer_name}}</h2>
+<table>
+  <tr>
+    <th>Fecha</th>
+    <th>Descripción</th>
+    <th>Monto</th>
+    <th>Saldo</th>
+  </tr>
+  {% for movimiento in movimientos %}
+  <tr>
+    <td>{{ movimiento.created_at}}</td>
+    <td>{{ movimiento.type }}</td>
+    <td>$ {{ movimiento.amount }}</td>
+    <td>$ {{ cuenta.balance }}</td>
+  </tr>
+  {% endfor %}
+{% endblock %}

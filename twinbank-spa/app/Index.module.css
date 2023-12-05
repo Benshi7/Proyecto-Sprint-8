@@ -1,0 +1,708 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+.content {
+  flex-grow: 1;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: hidden;
+}
+.main-content {
+  background-color: #e4e4e4;
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  color: #202020;
+}
+
+.content button {
+  cursor: pointer;
+}
+
+.account-greeting {
+  color: #fff;
+}
+
+.cards-container {
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.row {
+  margin: 0 auto;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+
+.column {
+  margin-right: 32px;
+}
+
+.account-card {
+  display: flex;
+  height: 105px;
+  width: 357px;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 18px 16px 19px 16px;
+  border-radius: 10px;
+  background: linear-gradient(
+    to bottom right,
+    #fff 0%,
+    #f5f5f5 24%,
+    #eee 50%,
+    #eee 100%
+  );
+}
+
+.account-card h3 {
+  width: inherit;
+  color: #141414;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.account-card:first-of-type {
+  margin-bottom: 39px;
+}
+
+.account-card h3::after {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 9px;
+  background: linear-gradient(71deg, #000 0%, #000 96.35%, #4a00c5 100%);
+  margin-top: 4px;
+}
+
+.account-amount {
+  color: #141414;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  display: flex;
+}
+
+.account-amount span {
+  color: rgba(20, 20, 20, 0.77);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-left: 3px;
+}
+
+.cta-button {
+  display: flex;
+  width: 357px;
+  height: 41px;
+  padding: 10px 32px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #ec9044 0%, #e77f29 100%);
+  color: white;
+  border: none;
+  font-family: "Inter";
+  margin-top: 29px;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  transition: transform 0.3s;
+}
+
+.creditcard-container {
+  display: flex;
+  flex-direction: column;
+  width: 354px;
+  height: 319px;
+  padding: 18px 16px 18px 16px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: linear-gradient(
+    to bottom right,
+    #fff 0%,
+    #f5f5f5 24%,
+    #eee 50%,
+    #eee 100%
+  );
+}
+
+.creditcard img {
+  margin-left: 15px;
+}
+
+.creditcard {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 258px;
+  height: 147px;
+  flex-shrink: 0;
+  border-radius: 18.987px;
+  background: linear-gradient(180deg, #ec9044 3.21%, #e8832f 96.61%);
+  box-shadow: 7.59494px 9.49367px 15.18987px 0px rgba(0, 0, 0, 0.05);
+  flex-direction: column;
+  align-items: flex-start;
+  text-transform: uppercase;
+  margin-top: 16px;
+}
+
+.cardnumber,
+.cardname,
+.venc,
+.carddata1 {
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #fff;
+  position: relative;
+  letter-spacing: 2.1px;
+  font-family: Inter !important;
+}
+
+.cardnumber {
+  top: 50px;
+  left: 15px;
+  letter-spacing: 2.1px;
+  font-size: 13px;
+}
+.cardname,
+.venc {
+  top: 48px;
+}
+
+.cardname {
+  letter-spacing: 0.55px;
+  font-size: 11px;
+}
+
+.venc {
+  font-size: 10px;
+}
+
+.carddata1 {
+  position: relative;
+  left: 15px;
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  min-width: 220px;
+  justify-content: space-between;
+}
+
+.carddata2 {
+  position: relative;
+  left: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  min-width: 178px;
+  justify-content: space-between;
+}
+
+.cardlogo {
+  position: relative;
+  top: 25px;
+  left: 188px;
+}
+
+.creditcard-container h3 {
+  color: #141414;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.creditcard-container h3::after {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 9px;
+  background: linear-gradient(71deg, #000 0%, #000 96.35%, #4a00c5 100%);
+  margin-top: 4px;
+}
+
+.bar {
+  background-color: gray;
+  height: 2px;
+  width: 53%;
+  margin: 10px auto;
+}
+
+.actions {
+  display: flex;
+  padding: 0px 2px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.action-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+}
+
+.action-button p {
+  color: #798ba3;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-align: center;
+}
+
+.actions button {
+  width: 48px;
+  padding: 0;
+  margin: 0;
+  height: 48px;
+  border-radius: 7.313px;
+  background: linear-gradient(90deg, #255066 0%, #366278 100%);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actions button:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s;
+}
+
+.transfer-container {
+  display: flex;
+  width: 341px;
+  height: 319px;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px 16px 19px 16px;
+  border-radius: 10px;
+  background: linear-gradient(
+    to bottom right,
+    #fff 0%,
+    #f5f5f5 24%,
+    #eee 50%,
+    #eee 100%
+  );
+}
+.transfer-inputs {
+  display: flex;
+  flex-direction: column;
+  margin: 6px 10px;
+  gap: 21px;
+}
+.transfer-container h3 {
+  color: #141414;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.transfer-container h3::after {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 9px;
+  background: linear-gradient(71deg, #000 0%, #000 96.35%, #4a00c5 100%);
+  margin-top: 4px;
+}
+
+.alias-input {
+  display: flex;
+  height: 28px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 9px;
+}
+
+.alias-input input {
+  border-radius: 8px;
+  border: 1px solid #838383;
+  background: rgba(0, 0, 0, 0.07);
+  width: 100%;
+  height: 28px;
+  padding: 2px 5px;
+}
+
+.alias-input input::placeholder,
+.transfer-container select {
+  color: rgba(0, 0, 0, 0.62);
+  font-family: "Inter";
+  font-size: 11px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 16px;
+}
+
+.alias-input button {
+  width: 29px;
+  height: 29px;
+  border-radius: 8px;
+  background: var(--linear, linear-gradient(180deg, #fa9949 0%, #e77f29 100%));
+  padding: 0;
+  margin: 0;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transfer-container select {
+  border-radius: 6.804px;
+  border: 0.567px solid #838383;
+  background-color: transparent;
+  padding: 2px 5px;
+  height: 32px;
+}
+
+.transfer-container select {
+  border-radius: 6.804px;
+  border: 0.567px solid #838383;
+  background-color: transparent;
+  padding: 2px 5px;
+  height: 32px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.transfer-container select:focus {
+  outline: none;
+}
+
+.amount-input {
+  height: 63px;
+  width: 100%;
+  border-radius: 8px;
+  border: 0.5px solid #838383;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 12px;
+  color: #606060;
+  font-size: 13px;
+  font-weight: 600;
+  justify-content: center;
+}
+
+.amount-input input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-family: "Inter";
+}
+
+.transfer-buttons {
+  display: flex;
+  align-items: flex-start;
+  gap: 19px;
+  justify-content: space-between;
+}
+
+.transfer-buttons button {
+  display: flex;
+  width: 100%;
+  padding: 9px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: "Inter";
+  font-size: 11px;
+}
+
+.send-button {
+  background: var(--linear, linear-gradient(180deg, #fa9949 0%, #e77f29 100%));
+}
+
+.save-button {
+  background: linear-gradient(0deg, #828282 0%, #828282 100%),
+    linear-gradient(
+      90deg,
+      rgba(240, 240, 240, 0.2) 0%,
+      rgba(240, 240, 240, 0) 100%
+    );
+}
+
+.graph-container {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 16px 18px 16px;
+  width: 832px;
+  height: 302px;
+  border-radius: 10px;
+  background: linear-gradient(
+    to bottom right,
+    #fff 0%,
+    #f5f5f5 24%,
+    #eee 50%,
+    #eee 100%
+  );
+}
+
+.graph-container h3::after {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 9px;
+  background: linear-gradient(71deg, #000 0%, #000 96.35%, #4a00c5 100%);
+  margin-top: 4px;
+}
+
+.graph-container img {
+  padding: 8px;
+}
+
+.balance-container {
+  display: flex;
+  min-width: 255px;
+  height: 302px;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  border-radius: 10px;
+  background: linear-gradient(
+    to bottom right,
+    #fff 0%,
+    #f5f5f5 24%,
+    #eee 50%,
+    #eee 100%
+  );
+}
+
+.balance-container h3::after {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 9px;
+  background: linear-gradient(71deg, #000 0%, #000 96.35%, #4a00c5 100%);
+  margin-top: 4px;
+}
+
+.graph-container h3,
+.balance-container h3 {
+  color: #141414;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.balance-container img {
+  margin: 0 auto;
+}
+
+.balance {
+  align-self: center;
+  margin-top: 16px;
+  width: 66%;
+}
+
+.balance-details-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+  margin-top: 13px;
+}
+
+.balance-detail {
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  gap: 8px;
+}
+
+.balance-detail p {
+  color: #313131;
+  font-size: 12px;
+}
+.orange-square {
+  border-radius: 4px;
+  background: var(--linear, linear-gradient(180deg, #fa9949 0%, #e77f29 100%));
+  width: 15px;
+  height: 15px;
+}
+
+.grey-square {
+  border-radius: 4px;
+  background: radial-gradient(
+    147.39% 110.03% at 26.57% 19.75%,
+    rgba(52, 80, 94, 0.81) 0%,
+    #304e5d 100%
+  );
+  width: 15px;
+  height: 15px;
+}
+
+/* Transacciones */
+
+.form-content {
+  width: min-content;
+  height: auto;
+  margin: auto;
+  color: black;
+  padding: 35px;
+  text-align: center;
+  font-size: 12px;
+  border: none;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-content h3 {
+  display: flex;
+  text-shadow: 1px 1px 10px gray;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+
+.input-content label {
+  margin: 0 30px 0 30px;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+}
+
+.input-content input {
+  margin: 0 auto;
+  border: #255066 solid 2px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  display: block;
+  width: 450px;
+  height: 30px;
+}
+
+.conteiner_submit {
+  display: flex;
+  justify-content: center;
+}
+
+.conteiner_submit input {
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  border: #255066 solid 3px;
+}
+.account-card,
+.creditcard-container,
+.graph-container,
+.balance-container,
+.creditcard img,
+.balance-container img {
+  max-width: 100%;
+}
+
+.content button:focus {
+  outline: none;
+}
+
+/*MEDIA QUERIES*/
+
+@media screen and (max-width: 1440px) {
+  .account-info {
+    width: auto;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 1515px) {
+  .row {
+    flex-direction: column;
+    gap: 39px;
+  }
+
+  .column {
+    margin: 0 auto;
+  }
+
+  .cta-button {
+    width: 100%;
+    padding: 21px 32px;
+    font-size: 16px;
+    height: fit-content;
+  }
+
+  .transfer-container,
+  .creditcard-container,
+  .account-card,
+  .cards-container,
+  .column,
+  .balance-container {
+    width: 100%;
+  }
+
+  .balance-container {
+    min-width: none;
+  }
+
+  .graph-container {
+    width: 100%;
+    height: fit-content;
+  }
+}
+
+.doughnut-container {
+  width: 100%;
+  display: flex;
+  max-width: 500px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 381px) {
+  .creditcard {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0%) scale(0.8);
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+  }
+
+  .creditcard-container {
+    height: fit-content;
+  }
+}
+
+@media screen and (max-width: 339px) {
+  .creditcard {
+    transform: translate(-50%, 0%) scale(0.7);
+  }
+}
+
+@media screen and (max-width: 339px) {
+  .creditcard {
+    transform: translate(-50%, 0%) scale(0.6);
+  }
+}

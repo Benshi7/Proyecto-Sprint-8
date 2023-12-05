@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Lista de Clientes</h2>
+  <div class="clientes-container">
+  {% for cliente in clientes %}
+  <div class="cliente">
+    <a href="{% url 'cliente_detail' cliente.customer_id %}">{{cliente.customer_id }} - {{ cliente.customer_name }} {{cliente.customer_surname}}</a>
+    <br>
+  </div>
+  {% endfor %}
+</div>
+
+  <style>
+    /* Estilo para la cuadrícula de tres columnas */
+    .clientes-container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+      padding-left: 24rem;
+      padding-right: 24rem;
+    }
+
+    /* Estilo básico para cada elemento de cliente */
+    .cliente {
+      border: 1px solid rgba(255, 255, 255, 0.33);
+      padding: 10px;
+      margin-bottom: 10px;
+      margin-right: 0px;
+    }
+  </style>
+{% endblock %}
