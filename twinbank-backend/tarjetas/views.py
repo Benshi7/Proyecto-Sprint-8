@@ -7,6 +7,7 @@ from .serializers import TarjetaSerializer
 from rest_framework import viewsets, permissions, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.decorators import action
 
 def generate_card_number(brand):
     if brand == 'AMEX' or brand == "1":
@@ -79,6 +80,17 @@ class TarjetaViewSet(viewsets.ModelViewSet):
     queryset = Tarjeta.objects.all()
     serializer_class = TarjetaSerializer
     """ permission_classes = [permissions.IsAuthenticated] """
+    @action(detail=False, methods=['GET'])
+    def customer_cards(self, request, *args, **kwargs):
+        # Obtén el ID del cliente desde los parámetros de la solicitud
+        customer_id = request.query_params.get('customer_id')
+
+        # Filtra las tarjetas basadas en el cliente
+        cards = Tarjeta.objects.filter(customer=customer_id)
+
+        # Serializa los datos y devuelve la respuesta
+        serializer = TarjetaSerializer(cards, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class TarjetaList(APIView):
     def post (self, request, format=None):

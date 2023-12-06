@@ -53,6 +53,8 @@ class Cliente(models.Model):
 class UsuarioCliente(AbstractUser):
     cliente = models.OneToOneField(Cliente, models.DO_NOTHING, blank=True, null=True)
     tipoclienteid = models.ForeignKey(Tiposcliente, models.DO_NOTHING, db_column='TipoClienteID', blank=True, null=True)
+    fotoUrl = models.TextField(blank=True, null=True)
+
     def __str__(self):
         return self.username
 

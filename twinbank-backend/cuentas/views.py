@@ -6,6 +6,7 @@ from .serializers import CuentaSerializer
 from rest_framework import viewsets, permissions, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.decorators import action
 
 def generar_iban():
     country_code = "ES"
@@ -42,6 +43,18 @@ class CuentaViewSet(viewsets.ModelViewSet):
     serializer_class = CuentaSerializer
     """ permission_classes = [permissions.IsAuthenticated] """
 
+    @action(detail=False, methods=['GET'])
+    def customer_accounts(self, request, *args, **kwargs):
+        # Obten el ID del cliente desde los parámetros de la solicitud
+        customer_id = request.query_params.get('customer_id')
+
+        # Filtra las cuentas basadas en el cliente
+        accounts = Cuenta.objects.filter(customer=customer_id)
+
+        # Serializa los datos y devuelve la respuesta
+        serializer = CuentaSerializer(accounts, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 class CuentaList(APIView):
     def post (self, request, format=None):
         serializer = CuentaSerializer(data=request.data)
@@ -54,3 +67,4 @@ class CuentaList(APIView):
         data = Cuenta.objects.all().order_by('account_id')
         serializer = CuentaSerializer(data, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+ 

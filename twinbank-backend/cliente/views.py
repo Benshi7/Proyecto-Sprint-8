@@ -15,6 +15,7 @@ from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 import json
 
+
 # Create your views here.
 
 @csrf_exempt
@@ -35,6 +36,8 @@ def login_view(request):
                 return JsonResponse({
                     'message': 'Autenticación exitosa',
                     'username': user.username,
+                    'fotoUrl': user.fotoUrl,
+                    'id': user.cliente_id,
                 })
             else:
                 # Credenciales incorrectas
