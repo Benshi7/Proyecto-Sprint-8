@@ -81,7 +81,7 @@ function Tarjetas() {
           throw new Error("Error al cargar los datos");
         }
         const data = await response.json();
-  
+
         // Mapear marcaid a tipo de tarjeta
         const mapMarcaIdToCardType = {
           1: "visa",
@@ -89,7 +89,7 @@ function Tarjetas() {
           3: "amex"
           // Puedes agregar más mapeos según sea necesario
         };
-  
+
         // Enriquecer los datos con información adicional según el tipo de tarjeta
         const enrichedData = data.map(card => {
           const cardType = mapMarcaIdToCardType[card.marcaid] || 'unknown'; // 'unknown' o maneja como desees si no hay coincidencia
@@ -100,18 +100,18 @@ function Tarjetas() {
             // ... Otras propiedades adicionales según sea necesario
           };
         });
-  
+
         setCardsData(enrichedData);
         console.log(enrichedData)
       } catch (error) {
         console.error("Error: ", error);
       }
     };
-  
+
     fetchCardsData();
-    
+
   }, []);
-  
+
 
   return (
     <div className={styles.content}>
