@@ -6,3 +6,7 @@ from .views import ClienteViewSet
 router = DefaultRouter()
 
 router.register(r'clientes', ClienteViewSet, basename='cliente')
+
+urlpatterns = [
+  path('', include(router.urls)),
+]
