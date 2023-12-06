@@ -56,6 +56,21 @@ const Login = () => {
 
   }
 
+  const onLogin2 = async (e) => {
+    e.preventDefault()
+
+      const options = {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.4.4'},
+        body: 'false'
+      };
+
+      const res = await fetch('http://127.0.0.1:8000/api/usuarios/', options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+      console.log(res)
+    }
 
   return (
     <div className="login-body">
