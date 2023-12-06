@@ -32,6 +32,7 @@ urlpatterns = [
     path('api/tarjetas', TarjetaList.as_view(), name='tarjeta_list_api'),
     path('api/cuentas', CuentaList.as_view(), name='cuenta_list_api'),
     path('api/movimientos', MovimientosList.as_view(), name='movimientos_list_api'),
+    path('api/prestamos', PrestamosList.as_view(), name='prestamos_list_api'),
     path('home/', home, name='home2'),
     path('clientes/', cliente_list, name='cliente_list'),
     path('clientes/<int:cliente_id>/', cliente_detail, name='cliente_detail'),
