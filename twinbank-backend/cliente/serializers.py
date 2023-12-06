@@ -13,4 +13,4 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UsuarioCliente
         fields = '__all__'
-        read_only_fields = ['customer_id']
+        read_only_fields = ['customer_id'] 
