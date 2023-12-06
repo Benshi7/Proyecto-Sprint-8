@@ -19,6 +19,25 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const Main = () => {
   const randomNumber = (Math.random() * 20000).toFixed();
   const { user } = useUser();
+  const [cuentas, setCuentas] = useState([])
+
+
+  const getCuentas = async () => {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/cuentas/customer_accounts/?customer_id=${user.id}`
+      );
+      const data = await response.json();
+      console.log(data);
+      setCuentas(data);
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  };
+
+  useEffect(() => {
+    getCuentas();
+  }, []);
+
 
   // Variables para el gráfico
   const saldo = parseFloat(user?.saldo || localStorage.getItem("saldo")) || 0;
@@ -70,9 +89,14 @@ const Main = () => {
                 <div className={styles["account-card"]}>
                   <h3>Saldo total de la cuenta</h3>
                   <div className={styles["account-amount"]}>
-                    <h2>${user?.saldo || localStorage.getItem("saldo")}</h2>
-                    <span></span>
+                    {
+                    cuentas.map((cuenta) => (
+                  <div key={cuenta.account_id}>
+                 {cuenta.tipo_cuenta === 1 &&  <div style={{marginRight:'15px'}}><p>Caja Ahorro: ${cuenta.balance}</p></div>}
                   </div>
+                  ))}
+                  </div>
+
                 </div>
                 <div className={styles["account-card"]}>
                   <h3>Consumos del período actual</h3>

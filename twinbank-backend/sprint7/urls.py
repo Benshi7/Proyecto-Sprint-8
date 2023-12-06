@@ -35,6 +35,7 @@ urlpatterns = [
     path('api/cuentas/customer_accounts/', CuentaViewSet.as_view({'get': 'customer_accounts'}), name='customer-accounts'),
     path('api/movimientos', MovimientosList.as_view(), name='movimientos_list_api'),
     path('api/prestamos', PrestamosList.as_view(), name='prestamos_list_api'),
+    path('api/prestamos/customer_loans/', PrestamosViewSet.as_view({'get': 'customer_loans'}), name='customer-loans'),
     path('api/login', login_view, name='login_api'),
     path('home/', home, name='home2'),
     path('clientes/', cliente_list, name='cliente_list'),

@@ -6,6 +6,7 @@ from rest_framework import viewsets, permissions, status, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
+from rest_framework.decorators import action
 
 # Create your views here.
 
@@ -13,6 +14,18 @@ class PrestamosViewSet(viewsets.ModelViewSet):
     queryset = Prestamo.objects.all()
     serializer_class = PrestamoSerializer
     """ permission_classes = [permissions.IsAuthenticated] """
+
+    @action(detail=False, methods=['GET'])
+    def customer_loans(self, request, *args, **kwargs):
+        # Obten el ID del cliente desde los parámetros de la solicitud
+        customer_id = request.query_params.get('customer_id') 
+
+        # Filtra las cuentas basadas en el cliente
+        loans = Prestamo.objects.filter(customer=customer_id)
+
+        # Serializa los datos y devuelve la respuesta
+        serializer = PrestamoSerializer(loans, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class PrestamosList(APIView):
     def post (self, request, format=None):
