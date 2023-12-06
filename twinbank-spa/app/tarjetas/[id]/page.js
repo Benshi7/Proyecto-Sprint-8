@@ -81,7 +81,7 @@ function CardDetail({ params }) {
             <div className={styles["card-inner"]}>
               <div
                 className={styles["card-front"]}
-                style={{ background: gradient }}
+                style={{ background: red }}
               >
                 <div className={styles["card-bg"]}></div>
                 {type === "mastercard" ? (

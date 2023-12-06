@@ -1,5 +1,5 @@
 'use client'
-import { React, useEffect } from 'react'
+import { React, useEffect, useState } from 'react'
 import './Prestamos.css'
 import { useUser } from '../utils/UserContext'
 import { usePrestamo } from './usePrestamo'
@@ -20,6 +20,27 @@ const Prestamos = () => {
     handleLoanTermChange
   } = usePrestamo()
 
+  const [prestamos, setPrestamos] = useState([])
+
+  const getPrestamos = async () => {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/prestamos/customer_loans/?customer_id=${user.id}`
+        );
+        const data = await response.json();
+        console.log(data);
+        setPrestamos(data);
+        }
+    catch (error) {
+        console.error("Error: ", error);
+        }
+    }
+
+    useEffect(() => {
+        getPrestamos();
+        }
+    , []);
+
+
   return (
     <div className="content">
     <div className="main_content">
@@ -27,7 +48,27 @@ const Prestamos = () => {
         <h3>Bienvenido <span>{ user?.username || localStorage.getItem('username') }</span></h3>
 
             <section>
-
+                    <h2>Prestamos Adquiridos</h2>
+                    <table className="calculator">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Tipo</th>
+      <th>Fecha</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {prestamos && prestamos.map((loan) => (
+      <tr key={loan.loan_id}>
+        <td>{loan.loan_id}</td>
+        <td>{loan.loan_type}</td>
+        <td>{loan.loan_date}</td>
+        <td>${loan.loan_total}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
                 <h2>Simulación de Prestamos</h2>
                 <p>Ingrese los números a calcular</p>
                 <br/>
