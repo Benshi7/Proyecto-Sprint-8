@@ -26,6 +26,11 @@ from prestamos.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/clientes', ClienteList.as_view(), name='cliente_list_api'),
+    path('api/cuentas', CuentaList.as_view(), name='cuenta_list_api'),
+    path('api/usuarios', UserList.as_view(), name='user_list_api'),
+    path('api/usuarios/<int:user_id>', UserDetail.as_view(), name='user_detail_api'),
+    path('api/tarjetas', TarjetaList.as_view(), name='tarjeta_list_api'),
+    path('api/cuentas', CuentaList.as_view(), name='cuenta_list_api'),
     path('home/', home, name='home2'),
     path('clientes/', cliente_list, name='cliente_list'),
     path('clientes/<int:cliente_id>/', cliente_detail, name='cliente_detail'),

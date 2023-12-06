@@ -2,6 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from shared_models.models import Cliente, Cuenta, Movimientos
 from .forms import CuentaForm
 import random
+from .serializers import CuentaSerializer
+from rest_framework import viewsets, permissions, status
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 def generar_iban():
     country_code = "ES"
@@ -32,3 +36,21 @@ def crear_cuenta_bancaria(request, cliente_id):
         form = CuentaForm()
 
     return render(request, 'crear_cuenta_bancaria.html', {'form': form, 'cliente': cliente})
+
+class CuentaViewSet(viewsets.ModelViewSet):
+    queryset = Cuenta.objects.all()
+    serializer_class = CuentaSerializer
+    """ permission_classes = [permissions.IsAuthenticated] """
+
+class CuentaList(APIView):
+    def post (self, request, format=None):
+        serializer = CuentaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request):
+        data = Cuenta.objects.all().order_by('account_id')
+        serializer = CuentaSerializer(data, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

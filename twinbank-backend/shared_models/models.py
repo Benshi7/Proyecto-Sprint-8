@@ -51,9 +51,9 @@ class Cliente(models.Model):
         return f"{self.customer_name} {self.customer_surname}"
 
 class UsuarioCliente(AbstractUser):
+    user_id = models.AutoField(primary_key=True)
     cliente = models.OneToOneField(Cliente, models.DO_NOTHING, blank=True, null=True)
     tipoclienteid = models.ForeignKey(Tiposcliente, models.DO_NOTHING, db_column='TipoClienteID', blank=True, null=True)
-
     def __str__(self):
         return self.username
 

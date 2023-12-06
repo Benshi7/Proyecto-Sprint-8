@@ -3,6 +3,10 @@ from datetime import datetime, timedelta
 from django.shortcuts import render, get_object_or_404, redirect
 from shared_models.models import Tarjeta, Cliente, Marcastarjeta
 from .forms import TarjetaForm
+from .serializers import TarjetaSerializer
+from rest_framework import viewsets, permissions, status
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 def generate_card_number(brand):
     if brand == 'AMEX' or brand == "1":
@@ -70,3 +74,21 @@ def crear_tarjeta(request, cliente_id):
         form = TarjetaForm()
 
     return render(request, 'crear_tarjeta.html', {'form': form, 'cliente': cliente})
+
+class TarjetaViewSet(viewsets.ModelViewSet):
+    queryset = Tarjeta.objects.all()
+    serializer_class = TarjetaSerializer
+    """ permission_classes = [permissions.IsAuthenticated] """
+
+class TarjetaList(APIView):
+    def post (self, request, format=None):
+        serializer = TarjetaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request):
+        data = Tarjeta.objects.all().order_by('card_id')
+        serializer = TarjetaSerializer(data, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

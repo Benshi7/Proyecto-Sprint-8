@@ -1,12 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from rest_framework import viewsets, permissions, status
-from .serializers import ClienteSerializer
+from rest_framework import viewsets, permissions, status, generics
+from .serializers import ClienteSerializer, UserSerializer
 from django.contrib import messages
-from shared_models.models import Cliente, Tiposcliente, Prestamo
+from shared_models.models import Cliente, Tiposcliente, Prestamo, UsuarioCliente
 from .forms import SolicitudPrestamoForm
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseBadRequest
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.status import HTTP_400_BAD_REQUEST
 
 
 # Create your views here.
@@ -80,3 +81,25 @@ class ClienteList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    def get(self, request):
+        data = Cliente.objects.all().order_by('customer_id')
+        serializer = ClienteSerializer(data, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request, pk, format=None):
+        cliente = self.get_object(pk)
+        serializer = ClienteSerializer(cliente, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
+class UserList(generics.ListAPIView):
+    queryset = UsuarioCliente.objects.all()
+    serializer_class = UserSerializer
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = UsuarioCliente.objects.all()
+    serializer_class = UserSerializer
