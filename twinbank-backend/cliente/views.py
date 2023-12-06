@@ -10,24 +10,44 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
-
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
+import json
 
 # Create your views here.
 
+@csrf_exempt
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        try:
+            # Obtén las credenciales del cuerpo de la solicitud JSON
+            data = json.loads(request.body.decode('utf-8'))
+            username = data.get('username')
+            password = data.get('password')
 
-        user = authenticate(request, username=username, password=password)
+            # Lógica de autenticación utilizando authenticate
+            user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            login(request, user)
-            return JsonResponse({'message': 'Autenticación exitosa'})
-        else:
-            return JsonResponse({'error': 'Credenciales incorrectas'}, status=400)
+            if user is not None:
+                # Autenticación exitosa
+                login(request, user)
+                return JsonResponse({
+                    'message': 'Autenticación exitosa',
+                    'username': user.username,
+                })
+            else:
+                # Credenciales incorrectas
+                return JsonResponse({'error': 'Credenciales incorrectas'}, status=400)
 
-    return JsonResponse({'error': 'Método no permitido'}, status=405)
+        except Exception as e:
+            # Manejo de otras excepciones
+            return JsonResponse({'error': str(e)}, status=400)
+
+    else:
+        # Método no permitido para otras solicitudes que no sean POST
+        return JsonResponse({'error': 'Método no permitido'}, status=405)
+
 
 
 def home(request):
@@ -51,7 +71,6 @@ def solicitud_prestamo(request, cliente_id):
 
     cliente = Cliente.objects.get(customer_id=cliente_id)
     limite_prestamos = int(cliente.tipoclienteid.limite_prestamos)
-
 
     if request.method == 'GET':
         form = SolicitudPrestamoForm(cliente_id=cliente_id)
