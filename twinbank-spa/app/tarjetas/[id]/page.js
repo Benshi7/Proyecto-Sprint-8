@@ -19,6 +19,35 @@ function CardDetail({ params }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const response = await fetch(`http://127.0.0.1:8000/api/tarjetas/${id}`);
+        const data = await response.json();
+        setTarjeta(data)
+        console.log(data)
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/movimientos/4`);
+        const data = await response.json();
+        setMovements(data);
+        console.log(data)
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+
+/*   useEffect(() => {
+    const fetchData = async () => {
+      try {
         const response = await fetch('http://localhost:3000/api/transferencias');
         const data = await response.json();
         setMovements(data.filter((movement) => {
@@ -29,7 +58,7 @@ function CardDetail({ params }) {
       }
     };
     fetchData();
-  }, []);
+  }, []); */
 
   const movementRows = movements.map((movement) => (
     <div className={styles["table-row"]} key={movement.id}>
@@ -46,7 +75,7 @@ function CardDetail({ params }) {
     </div>
   ))
 
-
+/* 
   useEffect(() => {
     const selectedCard = cardsData.find((card) => card.card.id === id);
 
@@ -59,9 +88,9 @@ function CardDetail({ params }) {
 
   if (!tarjeta) {
     return <div>Cargando...</div>;
-  }
+  } */
 
-  const {
+/*   const {
     id: idTarjeta,
     number,
     type,
@@ -69,8 +98,15 @@ function CardDetail({ params }) {
     seccode,
     gradient,
     transactions,
-  } = tarjeta;
+  } = tarjeta; */
 
+  const gradients = [
+    null,
+    "radial-gradient(circle at top left, #c3ec52 0%, #0ba29d 100%)",
+    "radial-gradient(circle at top left, rgba(91, 36, 122, 1) 0%, rgba(27, 206, 223, 1) 100%)",
+    "radial-gradient(circle at top left, #F36265 0%, #961276 100%)",
+    // Agrega más gradientes según sea necesario
+  ];
 
   return (
     <div className={styles.content}>
@@ -81,10 +117,10 @@ function CardDetail({ params }) {
             <div className={styles["card-inner"]}>
               <div
                 className={styles["card-front"]}
-                style={{ background: red }}
+                style={{ background: gradients[tarjeta?.marcaid] }}
               >
                 <div className={styles["card-bg"]}></div>
-                {type === "mastercard" ? (
+                {tarjeta?.marcaid === "mastercard" ? (
                   <img
                     src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_circles_92px_2x.png"
                     alt="Mastercard Logo"
@@ -125,15 +161,15 @@ function CardDetail({ params }) {
                 </div>
                 <div className={styles["card-chip"]}></div>
                 <div className={styles["card-holder"]}>TwinBank Card</div>
-                <div className={styles["card-number"]}>{number}</div>
-                <div className={styles["card-valid"]}>{valid}</div>
+                <div className={styles["card-number"]}>{tarjeta?.number}</div>
+                <div className={styles["card-valid"]}>{tarjeta?.expiration_date}</div>
               </div>
               <div
                 className={styles["card-back"]}
-                style={{ background: gradient }}
+                style={{ background: gradients[tarjeta?.marcaid] }}
               >
-                <div className={styles["card-signature"]}></div>
-                <div className={styles["card-seccode"]}>{seccode}</div>
+                <div className={styles["card-signature"]}>{user?.username}</div>
+                <div className={styles["card-seccode"]}>{tarjeta?.cvv}</div>
               </div>
             </div>
           </div>

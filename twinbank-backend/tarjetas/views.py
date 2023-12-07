@@ -8,6 +8,7 @@ from rest_framework import viewsets, permissions, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework import generics
 
 def generate_card_number(brand):
     if brand == 'AMEX' or brand == "1":
@@ -104,3 +105,11 @@ class TarjetaList(APIView):
         data = Tarjeta.objects.all().order_by('card_id')
         serializer = TarjetaSerializer(data, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class TarjetaList(generics.ListAPIView):
+    queryset = Tarjeta.objects.all()
+    serializer_class = TarjetaSerializer
+
+class TarjetaDetail(generics.RetrieveAPIView):
+    queryset = Tarjeta.objects.all()
+    serializer_class = TarjetaSerializer

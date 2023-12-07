@@ -31,6 +31,7 @@ urlpatterns = [
     path('api/usuarios/<int:pk>', UserDetail.as_view(), name='user_detail_api'),
     path('api/tarjetas', TarjetaList.as_view(), name='tarjeta_list_api'),
     path('api/tarjetas/customer_cards/', TarjetaViewSet.as_view({'get': 'customer_cards'}), name='customer-cards'),
+    path('api/tarjetas/<int:pk>', TarjetaDetail.as_view(), name='tarjeta_detail_api'),
     path('api/cuentas', CuentaList.as_view(), name='cuenta_list_api'),
     path('api/cuentas/customer_accounts/', CuentaViewSet.as_view({'get': 'customer_accounts'}), name='customer-accounts'),
     path('api/movimientos', MovimientosList.as_view(), name='movimientos_list_api'),
