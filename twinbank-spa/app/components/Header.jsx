@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { icon } from "@fortawesome/fontawesome-svg-core";
 import {
-  faUser,
   faEnvelope,
   faRightFromBracket ,
   faVault ,
@@ -20,6 +19,7 @@ import {
   faCreditCard,
   faBars,
   faXmark,
+  faUser
 } from '@fortawesome/free-solid-svg-icons'
 import { FaTimes } from 'react-icons/fa';
 import { FaBars } from 'react-icons/fa';
@@ -27,10 +27,11 @@ import { useRouter } from "next/navigation";
 
 const Header = () => {
   // const navigate = useNavigate()
-  const { user } = useUser()
-  const [isOpen, setIsOpen] = useState(false);
-  const displaySistem = () => setIsOpen(!isOpen);
-  const router = useRouter()
+  const { user } = useUser();
+  const [perfilMenuOpen, setPerfilMenuOpen] = useState(false);
+  const [navMenuOpen, setNavMenuOpen] = useState(false);
+  const router = useRouter();
+  
   //RUTA LOGIN
 
 
@@ -46,6 +47,7 @@ const Header = () => {
         <div className="header_container">
           <div className="header_tittle">
             <Image src={logo} alt="Logo de Twin Bank" width={60} height={60} />
+            
             <h2>Twin Bank {user?.name}</h2>
           </div>
           <div className="user_info">
@@ -58,15 +60,39 @@ const Header = () => {
                 </li>
               </ul>
             </div>
-            <Image src={user?.fotoUrl || localStorage.getItem('fotoUrl') || ''} alt="Imagen de perfil" width={40} height={40} />
-
+            <div id="perfil" onClick={() => setPerfilMenuOpen(!perfilMenuOpen)}>
+            <ul id="bar-1">
+              {perfilMenuOpen ? (
+                <Image
+                  src={user?.fotoUrl || localStorage.getItem('fotoUrl') || ''}
+                  alt="Imagen de perfil"
+                  width={40}
+                  height={40}
+                />
+              ) : (
+                <Image
+                  src={user?.fotoUrl || localStorage.getItem('fotoUrl') || ''}
+                  alt="Imagen de perfil"
+                  width={40}
+                  height={40}
+                />
+              )}
+            </ul>
+            <ul id="perfil-list" className={perfilMenuOpen ? "active" : ""}>
+              <li>
+                <Link href="/perfil">
+                  <FontAwesomeIcon icon={faUser} className="icon_nav_list" />
+                  Perfil
+                </Link>
+              </li>
+            </ul>
+          </div>
+            
             {/* funcionamiento del menu hamburguesa */}
-            <nav id="mobile" onClick={displaySistem}>
-              <ul id="bar">{isOpen ? <FaTimes className="icons_menu"/>:<FaBars className="icons_menu"/>}</ul>
-              <ul
-                id="nav-list"
-                className={isOpen ? "#nav-list active" : "#nav-list"}
-              >
+            <div>
+            <nav id="mobile" onClick={() => setNavMenuOpen(!navMenuOpen)}>
+              <ul id="bar">{navMenuOpen ? <FaTimes className="icons_menu" /> : <FaBars className="icons_menu" />}</ul>
+              <ul id="nav-list" className={navMenuOpen ? "active" : ""}>
 
                 <li className="hover_eff">
                 <Link href="/">
@@ -116,9 +142,11 @@ const Header = () => {
                     Cerrar Sesion
                   </a>
                 </li>
-                
               </ul>
             </nav>
+            </div>
+            
+            
           </div>
         </div>
       </div>

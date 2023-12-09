@@ -9,37 +9,25 @@ import './perfil.css'
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Main = () => {
-  const [clientes, setClientes] = useState([]);
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
-  const [email, setEmail] = useState("");
-  const [telefono, setTelefono] = useState("");
-  const [contrasena, setContrasena] = useState("");
+const PerfilCliente = () => {
+  const [cliente, setCliente] = useState({});
   const { user } = useUser();
 
   const getClientes = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/clientes/{customer_id}`, {
+      const response = await fetch(`http://127.0.0.1:8000/api/clientes/${user.id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include',
       });
       const data = await response.json();
       console.log(data);
-      setNombre(data[0]?.customer_name || "");
-      setApellido(data[0]?.customer_surname || "");
-      setDNI(data[0]?.customer_DNI || "");
-      setdob(data[0]?.dob || "");
-      setTipo(data[0]?.TipoClienteID || "");
-
+      setCliente(data)
     } catch (error) {
       console.error("Error: ", error);
     }
   };
-  
 
   useEffect(() => {
     getClientes();
@@ -57,25 +45,27 @@ const Main = () => {
             <div className={styles["user-details-container"]}>
               <div className="user-details">
                 <div className="input-box">
-                  <p><strong>Nombre:</strong> {clientes.customer_name}</p>
+                  <p><strong>Nombre:</strong> {cliente?.customer_name}</p>
                 </div>
                 <div className="input-box">
-                  <p><strong>Apellido:</strong> {clientes.customer_surname}</p>
-                </div><div className="input-box">
-                  <p><strong>DNI:</strong> {clientes.customer_DNI}</p>
-                </div><div className="input-box">
-                  <p><strong>Fecha de Nacimiento:</strong> {clientes.dob}</p>
-                </div><div className="input-box">
-                  <p><strong>Nombre:</strong> {clientes.TipoClienteID}</p>
+                  <p><strong>Apellido:</strong> {cliente?.customer_surname}</p>
                 </div>
+                <div className="input-box">
+                  <p><strong>DNI:</strong> {cliente?.customer_DNI}</p>
+                </div>
+                <div className="input-box">
+                  <p><strong>Fecha de Nacimiento:</strong> {cliente?.dob}</p>
+                </div>
+                <div className="input-box">
+                  <p><strong>Nombre:</strong> {cliente?.TipoClienteID}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    
+    </div>
   );
 };
 
-export default Main; // Add this closing curly brace
+export default PerfilCliente;
