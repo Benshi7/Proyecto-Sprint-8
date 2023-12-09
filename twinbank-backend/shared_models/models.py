@@ -32,6 +32,20 @@ class Tiposcliente(models.Model):
 
     def __str__(self):
         return self.nombre
+class Empleado(models.Model):
+    employee_id = models.AutoField(primary_key=True)
+    employee_name = models.TextField()
+    employee_surname = models.TextField()
+    employee_hire_date = models.TextField()
+    employee_dni = models.TextField(db_column='employee_DNI')  # Field name made lowercase.
+    branch_id = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'empleado'
+
+    def __str__(self):
+        return f"{self.employee_name} {self.employee_surname}"
 
 
 class Cliente(models.Model):
@@ -52,6 +66,7 @@ class Cliente(models.Model):
 
 class UsuarioCliente(AbstractUser):
     cliente = models.OneToOneField(Cliente, models.DO_NOTHING, blank=True, null=True)
+    empleado = models.OneToOneField(Empleado, models.DO_NOTHING, blank=True, null=True)
     tipoclienteid = models.ForeignKey(Tiposcliente, models.DO_NOTHING, db_column='TipoClienteID', blank=True, null=True)
     fotoUrl = models.TextField(blank=True, null=True)
 
@@ -89,20 +104,6 @@ class Direcciones(models.Model):
         db_table = 'direcciones'
 
 
-class Empleado(models.Model):
-    employee_id = models.AutoField(primary_key=True)
-    employee_name = models.TextField()
-    employee_surname = models.TextField()
-    employee_hire_date = models.TextField()
-    employee_dni = models.TextField(db_column='employee_DNI')  # Field name made lowercase.
-    branch_id = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'empleado'
-
-    def __str__(self):
-        return f"{self.employee_name} {self.employee_surname}"
 
 
 class Movimientos(models.Model):

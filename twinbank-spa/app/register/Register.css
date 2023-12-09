@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+.login-body {
+  background: rgb(7,2,82);
+  background-image: linear-gradient(to top, #243949 0%, #517fa4 100%);
+  font-family: "Inter", sans-serif;
+  color: #1f1f1f;
+  letter-spacing: -0.4px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.form-login img {
+  width: 165px;
+  height: 130px;
+  margin: 10px;
+}
+
+.logo p {
+  font-size: 22px;
+  color: black;
+  text-shadow: 1px 1px 10px gray;
+  font-weight: bold;
+} 
+
+.form-login {
+  width: auto;
+  max-width: 400px;
+  height: auto;
+  margin: auto;
+  padding: 35px;
+  text-align: center;
+  font-size: 12px;
+  border: none;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+#saludo {
+  font-weight: bold;
+  font-size: 25px;
+  padding: 6px;
+}
+
+#nota {
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+input[type="text"].controles,
+input[type="password"].controles {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px 10px;
+  font-size: 14px;
+  border-width: 1px;
+  background: rgb(255 255 255 / 35%);
+  border-radius: 9px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: none;
+  color: black;
+}
+
+.checkbox-container {
+  align-items: center;
+}
+
+.buttons {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-color: none;
+  background-color: #025e91;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.buttons:hover {
+  background-color: #034975;
+  transform: scale(1.02); 
+}
+
+input[type="submit"] {
+  font-family: "Inter", sans-serif;
+}
+
+input::placeholder {
+  font-family: "Inter", sans-serif;
+  letter-spacing: -0.4px;
+}
+
+.form-login a {
+  color: black;
+  text-decoration: none;
+}
+
+.form-login a:hover {
+  text-decoration: underline;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #025e91;
+  border-radius: 3px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.checkbox-container label {
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.error-message {
+  color: rgb(122, 8, 8);
+}

@@ -15,7 +15,6 @@ from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 import json
 
-
 # Create your views here.
 
 @csrf_exempt
@@ -146,4 +145,4 @@ class UserList(generics.ListAPIView):
 
 class UserDetail(generics.RetrieveAPIView):
     queryset = UsuarioCliente.objects.all()
-    serializer_class = UserSerializer 
+    serializer_class = UserSerializer
