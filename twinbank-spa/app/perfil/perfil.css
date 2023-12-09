@@ -1,0 +1,58 @@
+/* styles.css */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.content {
+  padding: 20px;
+}
+
+.user-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.input-box {
+  flex: 1 1 calc(33.33% - 20px);
+}
+
+.details {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Add additional styling as needed */
+/* styles.css */
+
+/* ... (otros estilos) */
+
+.user-details-container {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* .user-details-container .user-details {
+  /* Estilos específicos para el contenedor de detalles de usuario */
+
+
+.user-details-container .input-box {
+  margin-bottom: 15px;
+}
+
+.user-details-container .details {
+  font-weight: bold;
+  color: #333;
+}
+
+/* .user-details-container span {
+  /* Estilos generales para los spans dentro del contenedor */
+
+
+/* ... (otros estilos) */
