@@ -26,6 +26,7 @@ from prestamos.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/clientes', ClienteList.as_view(), name='cliente_list_api'),
+    path('api/clientes/<int:customer_id>/', RetrieveCustomer.as_view(), name='retrieve_customer'),
     path('api/cuentas', CuentaList.as_view(), name='cuenta_list_api'),
     path('api/usuarios', UserList.as_view(), name='user_list_api'),
     path('api/usuarios/<int:pk>', UserDetail.as_view(), name='user_detail_api'),

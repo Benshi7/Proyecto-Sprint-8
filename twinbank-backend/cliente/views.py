@@ -146,3 +146,14 @@ class UserList(generics.ListAPIView):
 class UserDetail(generics.RetrieveAPIView):
     queryset = UsuarioCliente.objects.all()
     serializer_class = UserSerializer
+
+class RetrieveCustomer(APIView):
+    def get(self, request, customer_id, format=None):
+        # Retrieve the Cliente object with the specified customer_id
+        cliente = get_object_or_404(Cliente, customer_id=customer_id)
+
+        # Serialize the Cliente object
+        serializer = ClienteSerializer(cliente)
+
+        # Return the serialized data as JSON response
+        return Response(serializer.data, status=status.HTTP_200_OK)
