@@ -17,7 +17,7 @@ export default function HomeStage({query}){
             const response = await fetch(
                 `http://localhost:3000/api/usuarios/${cbuCobro}`
               );
-        
+
             const data = await response.json();
             console.log(data)
             if(data){
@@ -26,12 +26,11 @@ export default function HomeStage({query}){
             } else {
                 console.log("Cargando...")
             }
-            
+
         }
         getUserCobro();
-    
-    },[])
 
+    },[])
 
     const onUpdateBalance = async (e) => {
         e.preventDefault();
@@ -41,15 +40,15 @@ export default function HomeStage({query}){
         );
         const data = await response.json();
         console.log(data);
-    
+
         const nuevoSaldo = data.saldo - monto;
-    
+
         const res = await fetch(`http://localhost:3000/api/usuarios/${user?.id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ saldo: nuevoSaldo }),
         }).then((res) => res.json());
-    
+
         console.log("Actualizado");
         setUser({
           ...user,
@@ -63,9 +62,9 @@ export default function HomeStage({query}){
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ saldo: nuevoSaldoRemitente }),
           }).then((res2) => res2.json());
-      
+
           console.log("Actualizado");
-        
+
 
         const transferencia = await fetch(
           `http://localhost:3000/api/transferencias/`,
@@ -111,7 +110,7 @@ export default function HomeStage({query}){
                 </div>
                 <div className="container_submit">
                     <button type="submit" id="add-button" className="add-button" onClick={onUpdateBalance}>Enviar</button>
-                </div>   
+                </div>
 
             </main>
             </div>

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUser } from '../utils/UserContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -11,13 +11,14 @@ export default function HomeTransaccion() {
   const [cbu, setCBU] = useState('');
   const [monto, setMonto] = useState('');
   const [validData, setValidData] = useState(false);
+  const [cuentas, setCuentas] = useState([]);
 
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`http://localhost:3000/api/usuarios`);
+    const response = await fetch(`http://localhost:3000/api/usuarios`)
 
     const data = await response.json();
     const userFounded = data.find((user) => user.id == cbu);
@@ -30,11 +31,41 @@ export default function HomeTransaccion() {
     const montoValue = parseFloat(monto);
 
     if (montoValue > 0) {
-      setValidData(true);
+      setValidData(true)
     } else {
-      alert('Monto inválido');
+      alert('Monto inválido')
     }
   };
+
+  const getCuentas = async () => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/cuentas/customer_accounts/?customer_id=${user.id}`,
+        {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (Array.isArray(data)) {
+        setCuentas(data);
+      } else {
+        console.error('La respuesta de la API no es un array:', data);
+      }
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  };
+
+  useEffect(() => {
+    getCuentas();
+  }, []);
+
 
   return (
     <div className="content">
@@ -50,7 +81,12 @@ export default function HomeTransaccion() {
           <div className={`${styles.container} container transferencia form-content`}>
             <div className={styles['balance-header']}>Saldo de la Cuenta</div>
             <p className={styles['account-balance']} id="account-balance">
-              $ {user?.saldo}
+            {
+                    cuentas.map((cuenta) => (
+                  <div key={cuenta.account_id}>
+                 {cuenta.tipo_cuenta === 1 &&  <div style={{marginRight:'15px'}}><p>Caja Ahorro: ${cuenta.balance}</p></div>}
+                  </div>
+                  ))}
             </p>
 
 

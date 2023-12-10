@@ -49,9 +49,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -61,9 +61,23 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'sprint7.urls'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+    ]
+}
+
+CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    'http://localhost:3000',
+]
+
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = None
 
 TEMPLATES = [
     {

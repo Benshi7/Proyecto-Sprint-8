@@ -14,6 +14,7 @@ import chart from "../images/chart.png";
 import contactless from "../images/pay-pass-icon.svg";
 import styles from "../Index.module.css";
 import Link from "next/link";
+import { Cagliostro } from "next/font/google";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 const Main = () => {
@@ -21,14 +22,26 @@ const Main = () => {
   const { user } = useUser();
   const [cuentas, setCuentas] = useState([])
 
-
   const getCuentas = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/cuentas/customer_accounts/?customer_id=${user.id}`
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/cuentas/customer_accounts/?customer_id=${user.id}`,
+        {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
       );
+
       const data = await response.json();
-      console.log(data);
-      setCuentas(data);
+
+      if (Array.isArray(data)) {
+        setCuentas(data);
+      } else {
+        console.error('La respuesta de la API no es un array:', data);
+      }
     } catch (error) {
       console.error("Error: ", error);
     }

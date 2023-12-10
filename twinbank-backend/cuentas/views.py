@@ -3,10 +3,13 @@ from shared_models.models import Cliente, Cuenta, Movimientos
 from .forms import CuentaForm
 import random
 from .serializers import CuentaSerializer
+from rest_framework.authentication import BasicAuthentication
 from rest_framework import viewsets, permissions, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from django.views.decorators.csrf import csrf_exempt
+
 
 def generar_iban():
     country_code = "ES"
@@ -38,10 +41,12 @@ def crear_cuenta_bancaria(request, cliente_id):
 
     return render(request, 'crear_cuenta_bancaria.html', {'form': form, 'cliente': cliente})
 
+
 class CuentaViewSet(viewsets.ModelViewSet):
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Cuenta.objects.all()
     serializer_class = CuentaSerializer
-    """ permission_classes = [permissions.IsAuthenticated] """
 
     @action(detail=False, methods=['GET'])
     def customer_accounts(self, request, *args, **kwargs):

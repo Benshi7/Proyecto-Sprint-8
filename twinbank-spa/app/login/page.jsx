@@ -20,7 +20,6 @@ const Login = () => {
 
   const router = useRouter()
 
-
   const onLogin = async (e) => {
     e.preventDefault();
     const credentials = {
@@ -28,7 +27,7 @@ const Login = () => {
       password,
     };
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/login', {
+      const response = await fetch('http://127.0.0.1:8000/api/login',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,6 +42,7 @@ const Login = () => {
           saldo: data.saldo,
           fotoUrl: data.fotoUrl,
           id: data.id,
+          esEmpleado: data.esEmpleado
         });
         localStorage.setItem('isLoggedIn', true);
         localStorage.setItem('fotoUrl', data.photoUrl);
@@ -57,7 +57,6 @@ const Login = () => {
     }
     onResetForm();
   };
-
 
   return (
     <div className="login-body">

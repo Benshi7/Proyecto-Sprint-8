@@ -13,13 +13,49 @@ function CardDetail({ params }) {
   const { id } = useParams();
   const { user } = useUser();
   const [movements, setMovements] = useState([])
+  const [cuentas, setCuentas] = useState([])
 
+  const getCuentas = async () => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/cuentas/customer_accounts/?customer_id=${user.id}`,
+        {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (Array.isArray(data)) {
+        setCuentas(data);
+      } else {
+        console.error('La respuesta de la API no es un array:', data);
+      }
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  };
+
+  useEffect(() => {
+    getCuentas();
+  }, []);
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/tarjetas/${id}`);
+        const response = await fetch(`http://127.0.0.1:8000/api/tarjetas/${id}`,
+        {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         const data = await response.json();
         setTarjeta(data)
         console.log(data)
@@ -33,7 +69,14 @@ function CardDetail({ params }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/movimientos/4`);
+        const response = await fetch(`http://127.0.0.1:8000/api/movimientos/cuenta/60/`,
+        {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         const data = await response.json();
         setMovements(data);
         console.log(data)
@@ -44,30 +87,14 @@ function CardDetail({ params }) {
     fetchData();
   }, []);
 
-
-/*   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/api/transferencias');
-        const data = await response.json();
-        setMovements(data.filter((movement) => {
-          return movement.cbuPago === user?.id
-        }));
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []); */
-
   const movementRows = movements.map((movement) => (
-    <div className={styles["table-row"]} key={movement.id}>
+    <div className={styles["table-row"]} key={movement?.id}>
       <div className={styles["detalle"]}>
-        {movement.nombre}
+        {movement?.type}
       </div>
-      <div className={styles["fecha"]}>{(movement.createdAt).split('T')[0]}</div>
+      <div className={styles["fecha"]}>{(movement?.created_at)}</div>
       <div className={styles["precio"]}>
-        {movement.monto}
+        ${movement?.amount}
       </div>
       <div className={styles["status"]}>
         <FontAwesomeIcon icon={faCheck} color="green" />

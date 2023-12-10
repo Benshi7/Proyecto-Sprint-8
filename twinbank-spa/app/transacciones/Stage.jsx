@@ -79,6 +79,8 @@ export default function HomeStage({ cbuCobro, monto }) {
     setSent(true);
   };
 
+
+
   return (
     <div className="content">
       <div className="main_content">

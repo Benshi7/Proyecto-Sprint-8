@@ -31,7 +31,7 @@ const Header = () => {
   const [perfilMenuOpen, setPerfilMenuOpen] = useState(false);
   const [navMenuOpen, setNavMenuOpen] = useState(false);
   const router = useRouter();
-  
+
   //RUTA LOGIN
 
 
@@ -47,7 +47,6 @@ const Header = () => {
         <div className="header_container">
           <div className="header_tittle">
             <Image src={logo} alt="Logo de Twin Bank" width={60} height={60} />
-            
             <h2>Twin Bank {user?.name}</h2>
           </div>
           <div className="user_info">

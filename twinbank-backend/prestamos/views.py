@@ -13,12 +13,11 @@ from rest_framework.decorators import action
 class PrestamosViewSet(viewsets.ModelViewSet):
     queryset = Prestamo.objects.all()
     serializer_class = PrestamoSerializer
-    """ permission_classes = [permissions.IsAuthenticated] """
 
     @action(detail=False, methods=['GET'])
     def customer_loans(self, request, *args, **kwargs):
         # Obten el ID del cliente desde los parámetros de la solicitud
-        customer_id = request.query_params.get('customer_id') 
+        customer_id = request.query_params.get('customer_id')
 
         # Filtra las cuentas basadas en el cliente
         loans = Prestamo.objects.filter(customer=customer_id)
@@ -28,6 +27,7 @@ class PrestamosViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class PrestamosList(APIView):
+    permission_classes = [permissions.IsAuthenticated]
     def post (self, request, format=None):
         serializer = PrestamoSerializer(data=request.data)
         if serializer.is_valid():

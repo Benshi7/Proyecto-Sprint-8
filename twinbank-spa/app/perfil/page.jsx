@@ -6,7 +6,7 @@ import { Doughnut } from "react-chartjs-2";
 import styles from "../Index.module.css";
 import Link from "next/link";
 import './perfil.css'
-
+ 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const PerfilCliente = () => {
@@ -17,6 +17,7 @@ const PerfilCliente = () => {
     try {
       const response = await fetch(`http://127.0.0.1:8000/api/clientes/${user.id}`, {
         method: 'GET',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -51,13 +52,22 @@ const PerfilCliente = () => {
                   <p><strong>Apellido:</strong> {cliente?.customer_surname}</p>
                 </div>
                 <div className="input-box">
-                  <p><strong>DNI:</strong> {cliente?.customer_DNI}</p>
+                  <p><strong>DNI:</strong> {cliente?.customer_dni}</p>
                 </div>
                 <div className="input-box">
                   <p><strong>Fecha de Nacimiento:</strong> {cliente?.dob}</p>
                 </div>
                 <div className="input-box">
-                  <p><strong>Nombre:</strong> {cliente?.TipoClienteID}</p>
+                <p>
+                    <strong>Tipo Cliente:</strong>{" "}
+                    {cliente?.tipoclienteid === 1
+                      ? "Classic"
+                      : cliente?.tipoclienteid === 2
+                      ? "Gold"
+                      : cliente?.tipoclienteid === 3
+                      ? "Black"
+                      : ""}
+                  </p>
                 </div>
               </div>
             </div>

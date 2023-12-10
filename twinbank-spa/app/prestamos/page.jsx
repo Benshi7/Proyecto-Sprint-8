@@ -19,21 +19,35 @@ const Prestamos = () => {
     handleInterestRateChange,
     handleLoanTermChange
   } = usePrestamo()
-
+ 
   const [prestamos, setPrestamos] = useState([])
+
 
   const getPrestamos = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/prestamos/customer_loans/?customer_id=${user.id}`
-        );
-        const data = await response.json();
-        console.log(data);
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/prestamos/customer_loans/?customer_id=${user.id}`,
+        {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (Array.isArray(data)) {
         setPrestamos(data);
-        }
-    catch (error) {
-        console.error("Error: ", error);
-        }
+      } else {
+        console.error('La respuesta de la API no es un array:', data);
+      }
+    } catch (error) {
+      console.error("Error: ", error);
     }
+  };
+
 
     useEffect(() => {
         getPrestamos();

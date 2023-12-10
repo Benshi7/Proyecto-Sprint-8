@@ -11,7 +11,14 @@ function Tarjetas() {
   useEffect(() => {
     const fetchCardsData = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/tarjetas/customer_cards/?customer_id=${user.id}`); // Modifica esto según tu implementación
+        const response = await fetch(`http://127.0.0.1:8000/api/tarjetas/customer_cards/?customer_id=${user.id}`,
+        {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }); // Modifica esto según tu implementación
         if (!response.ok) {
           throw new Error("Error al cargar los datos");
         }

@@ -21,12 +21,11 @@ import json
 def login_view(request):
     if request.method == 'POST':
         try:
-            # Obtén las credenciales del cuerpo de la solicitud JSON
+
             data = json.loads(request.body.decode('utf-8'))
             username = data.get('username')
             password = data.get('password')
 
-            # Lógica de autenticación utilizando authenticate
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
@@ -37,17 +36,18 @@ def login_view(request):
                     'username': user.username,
                     'fotoUrl': user.fotoUrl,
                     'id': user.cliente_id,
+                    'esEmpleado': user.esEmpleado,
                 })
             else:
-                # Credenciales incorrectas
+
                 return JsonResponse({'error': 'Credenciales incorrectas'}, status=400)
 
         except Exception as e:
-            # Manejo de otras excepciones
+
             return JsonResponse({'error': str(e)}, status=400)
 
     else:
-        # Método no permitido para otras solicitudes que no sean POST
+
         return JsonResponse({'error': 'Método no permitido'}, status=405)
 
 
@@ -114,6 +114,7 @@ class ClienteViewSet(viewsets.ModelViewSet):
     """ permission_classes = [permissions.IsAuthenticated] """
 
 class ClienteList(APIView):
+    permission_classes = [permissions.IsAuthenticated]
     def post (self, request, format=None):
         serializer = ClienteSerializer(data=request.data)
         if serializer.is_valid():
@@ -142,12 +143,15 @@ class ClienteList(APIView):
 class UserList(generics.ListAPIView):
     queryset = UsuarioCliente.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class UserDetail(generics.RetrieveAPIView):
     queryset = UsuarioCliente.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 class RetrieveCustomer(APIView):
+    permission_classes = [permissions.IsAuthenticated]
     def get(self, request, customer_id, format=None):
         # Retrieve the Cliente object with the specified customer_id
         cliente = get_object_or_404(Cliente, customer_id=customer_id)

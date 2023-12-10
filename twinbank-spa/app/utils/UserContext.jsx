@@ -11,6 +11,7 @@ export function UserProvider ({ children }) {
       username: '',
       saldo: 0,
       fotoUrl: '',
+      esEmpleado: false,
     }
   )
 
