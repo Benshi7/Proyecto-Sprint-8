@@ -224,6 +224,53 @@ ul .logout a {
   align-items: center;
 }
 
+
+#perfil i {
+  color: black;
+  align-items: center;
+}
+
+
+#perfil:checked ~ .dropdown {
+    display: flex;
+  }
+
+/* .dropdown{
+  display: none;
+} */
+
+#perfil-list {
+  display: none;
+}
+.icons_menu{
+  color: white;
+  align-items: center;
+  margin-top: 8px;
+}
+
+
+#perfil-list.active {
+  display: flex;
+  margin: 2px 2px 2px 2px;
+  position: absolute;
+  width: auto;
+  list-style: none;
+  text-decoration: none;
+  
+}
+
+#perfil-list.active a {
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  font-family: "Inter", sans-serif;
+  margin-left: 5px;
+}
+
 @media screen and (max-width: 769px) {
 
   #nav-list {
@@ -298,6 +345,17 @@ ul .logout a {
   }
 
   #mobile i {
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    padding-left: 1rem;
+  }
+
+  #perfil {
+    display: block;
+  }
+
+  #perfil i {
     font-size: 24px;
     cursor: pointer;
     color: #fff;
