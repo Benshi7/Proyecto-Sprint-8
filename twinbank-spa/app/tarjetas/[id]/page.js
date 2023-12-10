@@ -1,17 +1,17 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
-import { useUser } from "@/app/utils/UserContext";
-import cardsData from "../../../public/tarjetas.json";
-import styles from "../Tarjetas.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react"
+import { useParams, useRouter } from "next/navigation"
+import { useUser } from "@/app/utils/UserContext"
+import cardsData from "../../../public/tarjetas.json"
+import styles from "../Tarjetas.module.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCheck } from "@fortawesome/free-solid-svg-icons"
 
 function CardDetail({ params }) {
-  const router = useRouter();
-  const [tarjeta, setTarjeta] = useState(null);
-  const { id } = useParams();
-  const { user } = useUser();
+  const router = useRouter()
+  const [tarjeta, setTarjeta] = useState(null)
+  const { id } = useParams()
+  const { user } = useUser()
   const [movements, setMovements] = useState([])
   const [cuentas, setCuentas] = useState([])
 
