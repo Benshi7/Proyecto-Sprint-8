@@ -40,6 +40,7 @@ urlpatterns = [
     path('api/prestamos', PrestamosList.as_view(), name='prestamos_list_api'),
     path('api/prestamos/customer_loans/', PrestamosViewSet.as_view({'get': 'customer_loans'}), name='customer-loans'),
     path('api/login', login_view, name='login_api'),
+    path('api/register', register_view, name='register_api'),
     path('api/empleados', EmpleadoList.as_view(), name='empleado_list_api'),
     path('api/empleados/<int:employee_id>/', RetrieveEmpleado.as_view(), name='retrieve_empleado'),
     path('home/', home, name='home2'),
