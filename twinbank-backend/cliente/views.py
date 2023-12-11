@@ -50,7 +50,40 @@ def login_view(request):
 
         return JsonResponse({'error': 'Método no permitido'}, status=405)
 
+@csrf_exempt
+def register_view(request):
+    if request.method == 'POST':
+        try:
 
+            data = json.loads(request.body.decode('utf-8'))
+            username = data.get('username')
+            password = data.get('password')
+            fotoUrl = data.get('fotoUrl')
+            esEmpleado = data.get('esEmpleado')
+
+            if not username or not password:
+                return JsonResponse({'error': 'Se requiere nombre de usuario y contraseña'}, status=400)
+
+            if UsuarioCliente.objects.filter(username=username).exists():
+                return JsonResponse({'error': 'El nombre de usuario ya existe'}, status=400)
+
+            user = UsuarioCliente.objects.create_user(username=username, password=password, fotoUrl=fotoUrl, esEmpleado=esEmpleado)
+
+            return JsonResponse({
+                'message': 'Usuario creado exitosamente',
+                'username': user.username,
+                'fotoUrl': user.fotoUrl,
+                'id': user.cliente_id,
+                'esEmpleado': user.esEmpleado,
+            })
+
+        except Exception as e:
+
+            return JsonResponse({'error': str(e)}, status=400)
+
+    else:
+
+        return JsonResponse({'error': 'Método no permitido'}, status=405)
 
 def home(request):
   return render(request, 'home.html')
