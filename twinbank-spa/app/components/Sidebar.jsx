@@ -61,6 +61,12 @@ const Sidebar = () => {
             <p>Contacto</p>
           </Link>
           </li>
+          <li>
+          <Link href="/empleadoview" className="hover_eff fontawesome">
+            <FontAwesomeIcon icon={faEnvelope}  className="icon_nav_list" />
+            <p>Admin</p>
+          </Link>
+          </li>
       </ul>
     </div>
   );

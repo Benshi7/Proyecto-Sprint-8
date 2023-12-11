@@ -7,8 +7,29 @@ const empleadoview = () => {
 
     const { user } = useUser();
 
+    const [empleado, setEmpleado] = useState({})
     const [clientes, setClientes] = useState([])
     const [prestamos, setPrestamos] = useState([])
+
+    const getEmpleado = async () => {
+      try {
+        const response = await fetch(`http://127.0.1:8000/api/empleados/${user.id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          }, 
+          credentials: 'include',
+        });
+        const data = await response.json();
+        setEmpleado(data);
+      } catch (error) {
+        console.error("Error: ", error);
+      }
+    };
+
+    useEffect(() => {
+      getEmpleado();
+    }, []);
 
     const getClientes = async () => {
         try {
@@ -17,11 +38,14 @@ const empleadoview = () => {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-            }
+            },
+            credentials: 'include',
           }
           );
           const data = await response.json();
-          setClientes(data.filter(cliente => cliente.branch_id === user.branch_id));
+          console.log(data);
+          console.log(user);
+          setClientes(data.filter(cliente => cliente.branch_id === empleado.branch_id));
         } catch (error) {
           console.error("Error: ", error);
         }
