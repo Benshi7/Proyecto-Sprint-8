@@ -14,6 +14,7 @@ const Login = () => {
   // const navigate = useNavigate()
   const { setUser } = useUser()
   const [showRegisterForm, setShowRegisterForm] = useState(false)
+  const [registrationType, setRegistrationType] = useState('');
 
   const { username, password, onInputChange, onResetForm } = useForm({
     username: '',
@@ -60,18 +61,21 @@ const Login = () => {
     onResetForm();
   }
 
-  const handleRegisterSubmit = async (registerData) => {
+  const handleRegisterSubmit = async (registerData, registrationType) => {
+    const dataToSend = { ...registerData, registrationType };
+    console.log(registrationType)
     try {
       const response = await fetch('http://127.0.0.1:8000/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(registerData),
+        body: JSON.stringify(dataToSend)
       });
-
+  
       const data = await response.json();
-
+      console.log(data)
+  
       if (response.ok) {
         setUser({
           logged: true,
@@ -87,15 +91,25 @@ const Login = () => {
         localStorage.setItem('id', data.id);
         router.push('/', { shallow: true, state: { logged: true }, replace: true });
       } else {
-        document.getElementById('error-message').innerText = data.error || 'Error de registro';
+        // Espera 100 milisegundos antes de intentar modificar el mensaje de error
+        setTimeout(() => {
+          const errorMessageElement = document.getElementById('error-message');
+          if (errorMessageElement) {
+            errorMessageElement.innerText = data.error || 'Error de registro';
+          } else {
+            console.error('Elemento error-message no encontrado en el DOM.');
+          }
+        }, 100);
       }
     } catch (error) {
       console.error('Error en el registro:', error);
     }
     onResetForm();
   }
-    const toggleForm = () => {
-    setShowRegisterForm(!showRegisterForm);
+
+  const toggleForm = (type) => {
+    setRegistrationType(type);
+    setShowRegisterForm(true);
   };
 
   return (
@@ -105,7 +119,7 @@ const Login = () => {
           <p id="saludo">¡Bienvenido TwinkBank!</p>
           <p id="nota">Inicia sesión para continuar</p>
           <div id="login-container">
-            {showRegisterForm ? <RegisterForm onSubmit={handleRegisterSubmit} /> : (<form id="login-form" onSubmit={onLogin}>
+            {showRegisterForm ? <RegisterForm onSubmit={handleRegisterSubmit} registrationType={registrationType}/> : (<form id="login-form" onSubmit={onLogin}>
               <input
                 className="controles"
                 type="text"
@@ -135,7 +149,12 @@ const Login = () => {
               <p><a href="">¿Olvidaste tu contraseña?</a></p>
               <br />
               <p id="error-message" className="error-message"></p>
-              <p><a href="#" onClick={toggleForm}>{showRegisterForm ? 'Ya tienes una cuenta? Inicia sesión' : '¿No tienes cuenta? Regístrate'}</a></p>
+              <button className="buttons" onClick={() => toggleForm('existingClient')}>Cliente Existente</button>
+              <br />
+            <button className="buttons" onClick={() => toggleForm('newClient')}>Nuevo Cliente</button>
+            <br />
+            <button className="buttons" onClick={() => toggleForm('existingEmployee')}>Empleado Existente</button>
+            <br />
             </form>)}
           </div>
         </section>

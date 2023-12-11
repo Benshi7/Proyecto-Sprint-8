@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .serializers import ClienteSerializer, UserSerializer
 from django.contrib import messages
-from shared_models.models import Cliente, Tiposcliente, Prestamo, UsuarioCliente
+from shared_models.models import Cliente, Tiposcliente, Prestamo, UsuarioCliente, Empleado
 from .forms import SolicitudPrestamoForm
 from django.http import Http404, HttpResponse, HttpResponseBadRequest
 from rest_framework import viewsets, permissions, status, generics
@@ -14,6 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 import json
+
 
 # Create your views here.
 
@@ -50,40 +51,84 @@ def login_view(request):
 
         return JsonResponse({'error': 'Método no permitido'}, status=405)
 
+
 @csrf_exempt
 def register_view(request):
     if request.method == 'POST':
         try:
-
             data = json.loads(request.body.decode('utf-8'))
-            username = data.get('username')
-            password = data.get('password')
-            fotoUrl = data.get('fotoUrl')
-            esEmpleado = data.get('esEmpleado')
+            registration_type= data.get('registrationType')
 
-            if not username or not password:
-                return JsonResponse({'error': 'Se requiere nombre de usuario y contraseña'}, status=400)
+            if registration_type== 'existingClient':
+                return register_existing_client(data)
 
-            if UsuarioCliente.objects.filter(username=username).exists():
-                return JsonResponse({'error': 'El nombre de usuario ya existe'}, status=400)
+            elif registration_type== 'newClient':
+                return register_new_client(data)
 
-            user = UsuarioCliente.objects.create_user(username=username, password=password, fotoUrl=fotoUrl, esEmpleado=esEmpleado)
+            elif registration_type== 'existingEmployee':
+                return register_existing_employee(data)
 
-            return JsonResponse({
-                'message': 'Usuario creado exitosamente',
-                'username': user.username,
-                'fotoUrl': user.fotoUrl,
-                'id': user.cliente_id,
-                'esEmpleado': user.esEmpleado,
-            })
+            else:
+                return JsonResponse({'error': 'Tipo de registro no válido'}, status=400)
 
         except Exception as e:
-
             return JsonResponse({'error': str(e)}, status=400)
 
     else:
-
         return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+def register_existing_client(data):
+    username = data.get('username')
+    password = data.get('password')
+    dni = data.get('dni')
+
+    if not username or not password or not dni:
+        return JsonResponse({'error': 'Campos obligatorios faltantes'}, status=400)
+
+    user = authenticate(username=username, password=password)
+
+    if user and Cliente.objects.filter(dni=dni).exists():
+        # Registro exitoso, realiza las acciones adicionales si es necesario
+        return JsonResponse({'message': 'Registro exitoso para cliente existente'})
+    
+    return JsonResponse({'error': 'Error de autenticación o cliente no existente'}, status=400)
+
+def register_new_client(data):
+    # Lógica para registro de cliente nuevo
+    # Asegúrate de validar todos los campos necesarios y realizar las acciones correspondientes
+
+    username = data.get('username')
+    password = data.get('password')
+    name = data.get('name')
+    lastname = data.get('lastname')
+    dni = data.get('dni')
+    birthdate = data.get('birthdate')
+    client_type = data.get('clientType')
+    branch = data.get('branch')
+
+    if not username or not password or not name or not lastname or not dni or not birthdate or not client_type or not branch:
+        return JsonResponse({'error': 'Campos obligatorios faltantes'}, status=400)
+
+    # Asegúrate de validar y procesar los datos según tus requerimientos
+    # ...
+
+    return JsonResponse({'message': 'Registro exitoso para cliente nuevo'})
+
+def register_existing_employee(data):
+    username = data.get('username')
+    password = data.get('password')
+    dni = data.get('dni')
+    
+    if not username or not password or not dni:
+        return JsonResponse({'error': 'Campos obligatorios faltantes'}, status=400)
+
+    user = authenticate(username=username, password=password)
+
+    if user and Empleado.objects.filter(dni=dni).exists():
+        # Registro exitoso, realiza las acciones adicionales si es necesario
+        return JsonResponse({'message': 'Registro exitoso para empleado existente'})
+    
+    return JsonResponse({'error': 'Error de autenticación o empleado no existente'}, status=400)
 
 def home(request):
   return render(request, 'home.html')
