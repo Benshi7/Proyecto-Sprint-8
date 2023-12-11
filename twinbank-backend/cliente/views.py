@@ -15,7 +15,6 @@ from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 import json
 
-
 # Create your views here.
 
 @csrf_exempt
@@ -90,7 +89,7 @@ def register_existing_client(data):
     if user and Cliente.objects.filter(dni=dni).exists():
         # Registro exitoso, realiza las acciones adicionales si es necesario
         return JsonResponse({'message': 'Registro exitoso para cliente existente'})
-    
+
     return JsonResponse({'error': 'Error de autenticación o cliente no existente'}, status=400)
 
 def register_new_client(data):
@@ -99,18 +98,15 @@ def register_new_client(data):
 
     username = data.get('username')
     password = data.get('password')
-    name = data.get('name')
-    lastname = data.get('lastname')
-    dni = data.get('dni')
-    birthdate = data.get('birthdate')
-    client_type = data.get('clientType')
-    branch = data.get('branch')
+    customer_name = data.get('name')
+    customer_surname = data.get('lastname')
+    customer_dni = data.get('dni')
+    dob = data.get('birthdate')
+    tipo_cuenta = data.get('clientType')
+    branch_id = data.get('branch')
 
-    if not username or not password or not name or not lastname or not dni or not birthdate or not client_type or not branch:
+    if not username or not password or not customer_name or not customer_surname or not customer_dni or not dob or not tipo_cuenta or not branch_id:
         return JsonResponse({'error': 'Campos obligatorios faltantes'}, status=400)
-
-    # Asegúrate de validar y procesar los datos según tus requerimientos
-    # ...
 
     return JsonResponse({'message': 'Registro exitoso para cliente nuevo'})
 
