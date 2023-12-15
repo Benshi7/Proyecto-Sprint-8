@@ -23,7 +23,6 @@ const PerfilCliente = () => {
         },
       });
       const data = await response.json();
-      console.log(data);
       setCliente(data)
     } catch (error) {
       console.error("Error: ", error);

@@ -12,8 +12,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
+import { useUser } from "../utils/UserContext";
 
 const Sidebar = () => {
+  const { user } = useUser();
 
   const router = useRouter();
   return (
@@ -62,10 +64,11 @@ const Sidebar = () => {
           </Link>
           </li>
           <li>
-          <Link href="/empleadoview" className="hover_eff fontawesome">
-            <FontAwesomeIcon icon={faEnvelope}  className="icon_nav_list" />
-            <p>Admin</p>
-          </Link>
+          {user?.esEmpleado && (
+                      <Link href="/empleadoview" className="hover_eff fontawesome">
+                      <FontAwesomeIcon icon={faEnvelope}  className="icon_nav_list" />
+                      <p>Admin</p>
+                    </Link>)}
           </li>
       </ul>
     </div>

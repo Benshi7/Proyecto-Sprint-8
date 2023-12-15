@@ -45,12 +45,12 @@ const Login = () => {
           logged: true,
           username: data.username,
           saldo: data.saldo,
-          fotoUrl: data.fotoUrl,
+          fotoUrl: "https://i.imgur.com/Y7PJdJh.jpg",
           id: data.id,
           esEmpleado: data.esEmpleado
         });
         localStorage.setItem('isLoggedIn', true);
-        localStorage.setItem('fotoUrl', data.photoUrl);
+        localStorage.setItem('fotoUrl', data.fotoUrl);
         localStorage.setItem('saldo', data.saldo);
         localStorage.setItem('id', data.id);
         router.push('/', { shallow: true, state: { logged: true }, replace: true });
@@ -74,10 +74,9 @@ const Login = () => {
         },
         body: JSON.stringify(dataToSend)
       });
-  
+
       const data = await response.json();
-      console.log(data)
-  
+
       if (response.ok) {
         setUser({
           logged: true,
@@ -88,10 +87,16 @@ const Login = () => {
           esEmpleado: data.esEmpleado
         });
         localStorage.setItem('isLoggedIn', true);
-        localStorage.setItem('fotoUrl', data.photoUrl);
+        localStorage.setItem('fotoUrl', data.fotoUrl);
         localStorage.setItem('saldo', data.saldo);
         localStorage.setItem('id', data.id);
-        router.push('/', { shallow: true, state: { logged: true }, replace: true });
+        const errorMessageElement = document.getElementById('error-message');
+        if (errorMessageElement) {
+          errorMessageElement.innerText = 'Registro exitoso, debes regresar al login para ingresar';
+        } else {
+          console.error('Elemento error-message no encontrado en el DOM.');
+        }
+        router.push('/login', { shallow: true, state: { logged: false }, replace: true });
       } else {
         // Espera 100 milisegundos antes de intentar modificar el mensaje de error
         setTimeout(() => {
@@ -150,6 +155,7 @@ const Login = () => {
               <button type="submit" className="buttons" id="login-button" >Ingresar</button>
               <p><a href="">¿Olvidaste tu contraseña?</a></p>
               <br />
+              <h3><strong>Registrar un:</strong></h3>
               <p id="error-message" className="error-message"></p>
               <button className="buttons" onClick={() => toggleForm('existingClient')}>Cliente Existente</button>
               <br />
@@ -158,6 +164,7 @@ const Login = () => {
             <button className="buttons" onClick={() => toggleForm('existingEmployee')}>Empleado Existente</button>
             <br />
             </form>)}
+            <div id="error-message" className="error-message"></div>
           </div>
         </section>
     </div>

@@ -43,6 +43,7 @@ urlpatterns = [
     path('api/register', register_view, name='register_api'),
     path('api/empleados', EmpleadoList.as_view(), name='empleado_list_api'),
     path('api/empleados/<int:employee_id>/', RetrieveEmpleado.as_view(), name='retrieve_empleado'),
+    path('api/sucursales/', SucursalList.as_view(), name='retrieve_sucursal'),
     path('home/', home, name='home2'),
     path('clientes/', cliente_list, name='cliente_list'),
     path('clientes/<int:cliente_id>/', cliente_detail, name='cliente_detail'),

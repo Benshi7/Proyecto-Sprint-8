@@ -19,7 +19,6 @@ export default function HomeStage({query}){
               );
 
             const data = await response.json();
-            console.log(data)
             if(data){
                 setRemitente(data)
                 console.log("Usuario encontrado")

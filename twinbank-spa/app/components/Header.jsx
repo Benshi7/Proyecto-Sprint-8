@@ -63,14 +63,14 @@ const Header = () => {
             <ul id="bar-1">
               {perfilMenuOpen ? (
                 <Image
-                  src={user?.fotoUrl || localStorage.getItem('fotoUrl') || ''}
+                  src={user?.fotoUrl || "https://i.imgur.com/Y7PJdJh.jpg"}
                   alt="Imagen de perfil"
                   width={40}
                   height={40}
                 />
               ) : (
                 <Image
-                  src={user?.fotoUrl || localStorage.getItem('fotoUrl') || ''}
+                  src={user?.fotoUrl || "https://i.imgur.com/Y7PJdJh.jpg"}
                   alt="Imagen de perfil"
                   width={40}
                   height={40}
@@ -86,7 +86,7 @@ const Header = () => {
               </li>
             </ul>
           </div>
-            
+
             {/* funcionamiento del menu hamburguesa */}
             <div>
             <nav id="mobile" onClick={() => setNavMenuOpen(!navMenuOpen)}>

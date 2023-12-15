@@ -13,7 +13,7 @@ const empleadoview = () => {
 
     const getEmpleado = async () => {
       try {
-        const response = await fetch(`http://127.0.1:8000/api/empleados/${user.id}`, {
+        const response = await fetch(`http://127.0.1:8000/api/empleados/${user.id}/`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -83,6 +83,7 @@ const empleadoview = () => {
         const res = await fetch(`http://localhost:3000/api/usuarios/${customer_id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
+          credentials: 'include',
           body: JSON.stringify({ saldo: nuevoSaldo }),
           credentials: 'include',
         }).then((res) => res.json());
@@ -96,6 +97,7 @@ const empleadoview = () => {
        const res2 = await fetch(`http://localhost:3000/api/prestamos/${customer_id}`,
        {
          method: 'PUT',
+         credentials: 'include',
          headers: {
            'Content-Type': 'application/json',
          },
@@ -115,6 +117,7 @@ const empleadoview = () => {
       const res = await fetch(`http://localhost:3000/api/prestamos/${customer_id}`,
       {
         method: 'PUT',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -130,7 +133,6 @@ const empleadoview = () => {
  }
 
     return (
-      
         <div className="main_content">
           <h1>Empleadoview</h1>
           <h2>Sucursal N°{user.branch_id}</h2>

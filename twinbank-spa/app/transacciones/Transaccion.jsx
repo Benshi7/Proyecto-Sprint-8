@@ -36,11 +36,11 @@ export default function HomeTransaccion() {
       alert('Monto inválido')
     }
   };
-
+ 
   const getCuentas = async () => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/cuentas/customer_accounts/?customer_id=${user.id}`,
+        `http://127.0.0.1:8000/api/cuentas/customer_accounts/?customer_id=${user?.id}`,
         {
           method: 'GET',
           credentials: 'include',
