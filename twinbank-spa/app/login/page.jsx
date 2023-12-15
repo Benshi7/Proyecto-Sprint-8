@@ -38,6 +38,8 @@ const Login = () => {
         body: JSON.stringify(credentials),
       });
       const data = await response.json();
+      console.log(data);
+      console.log(response);
       if (response.ok) {
         setUser({
           logged: true,
