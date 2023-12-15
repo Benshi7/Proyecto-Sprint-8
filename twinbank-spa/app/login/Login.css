@@ -66,7 +66,11 @@ html {
   margin-bottom: 10px;
 }
 
-input[type="text"].controles,
+input[type="date"]::-webkit-inner-spin-button,::-webkit-calendar-picker-indicator{
+  filter: drop-shadow(16px 16px 20px rgb(255, 255, 255)) invert(100%);
+}
+
+input[type="text"].controles, input[type="date"].controles, select,
 input[type="password"].controles {
   width: 100%;
   margin-bottom: 15px;

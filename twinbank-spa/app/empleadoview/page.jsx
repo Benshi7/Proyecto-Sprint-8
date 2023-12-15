@@ -43,8 +43,6 @@ const empleadoview = () => {
           }
           );
           const data = await response.json();
-          console.log(data);
-          console.log(user);
           setClientes(data.filter(cliente => cliente.branch_id === 84));
         } catch (error) {
           console.error("Error: ", error);

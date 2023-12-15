@@ -19,10 +19,7 @@ const RegisterForm = ({ onSubmit, registrationType }) => {
       .then(response => response.json())
       .then(data => setSucursales(data))
       .catch(error => console.error('Error al obtener sucursales:', error));
-      console.log(sucursales)
   }, []);
-
-
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -88,6 +85,7 @@ const RegisterForm = ({ onSubmit, registrationType }) => {
           <input className="controles" type="text" name="lastname" value={lastname} onChange={onInputChange} placeholder="Apellido" />
           <input className="controles" type="text" name="dni" value={dni} onChange={onInputChange} placeholder="DNI" />
           <input className="controles" type="date" name="birthdate" value={birthdate} onChange={onInputChange} placeholder="Fecha de Nacimiento" />
+          <br />
           <select name="clientType" value={clientType} onChange={onInputChange} placeholder="Tipo de Cliente">
             <option value="" disabled>
               Seleccionar Tipo de Cliente
@@ -96,6 +94,7 @@ const RegisterForm = ({ onSubmit, registrationType }) => {
             <option value="2">Gold</option>
             <option value="3">Black</option>
           </select>
+          <br />
           <select name="branch" value={branch} onChange={onInputChange} placeholder="Sucursal">
         <option value="" disabled>
           Seleccionar Sucursal
@@ -116,7 +115,7 @@ const RegisterForm = ({ onSubmit, registrationType }) => {
         </>
       )}
       <button className="buttons" type="submit">Registrarse</button>
-      <Link href="/" className="buttons">Volver</Link>
+      <Link href="/" className="buttons"><h4>Volver</h4></Link>
     </form>
   );
 };

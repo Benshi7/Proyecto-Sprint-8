@@ -16,7 +16,6 @@ const getClientes = async () => {
       }
       );
       const data = await response.json();
-      console.log(data);
       setCuentas(data);
     } catch (error) {
       console.error("Error: ", error);

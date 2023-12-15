@@ -154,6 +154,7 @@ const Login = () => {
               <button type="submit" className="buttons" id="login-button" >Ingresar</button>
               <p><a href="">¿Olvidaste tu contraseña?</a></p>
               <br />
+              <h3><strong>Registrar un:</strong></h3>
               <p id="error-message" className="error-message"></p>
               <button className="buttons" onClick={() => toggleForm('existingClient')}>Cliente Existente</button>
               <br />
