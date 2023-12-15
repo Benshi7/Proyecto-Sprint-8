@@ -21,6 +21,7 @@ const empleadoview = () => {
           credentials: 'include',
         });
         const data = await response.json();
+        console.log(data);
         setEmpleado(data);
       } catch (error) {
         console.error("Error: ", error);
@@ -45,7 +46,7 @@ const empleadoview = () => {
           const data = await response.json();
           console.log(data);
           console.log(user);
-          setClientes(data.filter(cliente => cliente.branch_id === empleado.branch_id));
+          setClientes(data.filter(cliente => cliente.branch_id === 84));
         } catch (error) {
           console.error("Error: ", error);
         }
@@ -61,10 +62,12 @@ const empleadoview = () => {
               method: 'GET',
               headers: {
                   'Content-Type': 'application/json',
-              }
+              },
+              credentials: 'include',
           });
           const data = await response.json();
-          setPrestamos(data.filter(prestamo => clientes.some(cliente => cliente.customer_id === prestamo.customer_id)));
+          setPrestamos(data);
+          console.log("prestmos", data);
       } catch (error) {
           console.error("Error: ", error);
       }
@@ -72,7 +75,7 @@ const empleadoview = () => {
   
   useEffect(() => {
       getPrestamos();
-  }, [clientes]);
+  }, []);
   
 
   const aceptarPrestamo = async (customer_id) => {
@@ -81,6 +84,7 @@ const empleadoview = () => {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ saldo: nuevoSaldo }),
+          credentials: 'include',
         }).then((res) => res.json());
       
         console.log("Actualizado Saldo");
@@ -96,6 +100,7 @@ const empleadoview = () => {
            'Content-Type': 'application/json',
          },
          body: JSON.stringify({ loan_status: 'Aceptado' }),
+         credentials: 'include',
        }).then((res2) => res2.json());
 
        console.log("Actualizado Prestamo");
@@ -114,6 +119,7 @@ const empleadoview = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ loan_status: 'Rechazado' }),
+        credentials: 'include',
       }).then((res) => res.json());
 
       console.log("Actualizado Prestamo");
