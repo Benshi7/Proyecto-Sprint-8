@@ -68,7 +68,7 @@ class UsuarioCliente(AbstractUser):
     cliente = models.OneToOneField(Cliente, models.DO_NOTHING, blank=True, null=True)
     empleado = models.OneToOneField(Empleado, models.DO_NOTHING, blank=True, null=True)
     tipoclienteid = models.ForeignKey(Tiposcliente, models.DO_NOTHING, db_column='TipoClienteID', blank=True, null=True)
-    fotoUrl = models.TextField(blank=True, null=True)
+    fotoUrl = models.TextField(blank=True, null=True, default="https://i.imgur.com/Y7PJdJh.jpg")
     esEmpleado = models.BooleanField(default=False)
 
     def __str__(self):

@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+'use client'
+import React, { useState, useEffect} from 'react';
+import Link from 'next/link';
 
 const RegisterForm = ({ onSubmit, registrationType }) => {
   const [username, setUsername] = useState('');
@@ -9,6 +11,18 @@ const RegisterForm = ({ onSubmit, registrationType }) => {
   const [birthdate, setBirthdate] = useState('');
   const [clientType, setClientType] = useState('');
   const [branch, setBranch] = useState('');
+
+  const [sucursales, setSucursales] = useState([]);
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/api/sucursales/')  // Ajusta la ruta según tu configuración
+      .then(response => response.json())
+      .then(data => setSucursales(data))
+      .catch(error => console.error('Error al obtener sucursales:', error));
+      console.log(sucursales)
+  }, []);
+
+
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -78,18 +92,20 @@ const RegisterForm = ({ onSubmit, registrationType }) => {
             <option value="" disabled>
               Seleccionar Tipo de Cliente
             </option>
-            <option value="classic">Classic</option>
-            <option value="gold">Gold</option>
-            <option value="black">Black</option>
+            <option value="1">Classic</option>
+            <option value="2">Gold</option>
+            <option value="3">Black</option>
           </select>
           <select name="branch" value={branch} onChange={onInputChange} placeholder="Sucursal">
-            <option value="" disabled>
-              Seleccionar Sucursal
-            </option>
-            <option value="branch1">Sucursal 1</option>
-            <option value="branch2">Sucursal 2</option>
-            {/* Agrega más opciones según sea necesario */}
-          </select>
+        <option value="" disabled>
+          Seleccionar Sucursal
+        </option>
+        {sucursales.map(sucursal => (
+          <option key={sucursal.branch_id} value={sucursal.branch_id}>
+            {sucursal.branch_id} - {sucursal.branch_name}
+          </option>
+        ))}
+      </select>
         </>
       )}
       {registrationType === 'existingEmployee' && (
@@ -100,6 +116,7 @@ const RegisterForm = ({ onSubmit, registrationType }) => {
         </>
       )}
       <button className="buttons" type="submit">Registrarse</button>
+      <Link href="/" className="buttons">Volver</Link>
     </form>
   );
 };

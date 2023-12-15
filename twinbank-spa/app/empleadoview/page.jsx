@@ -13,7 +13,7 @@ const empleadoview = () => {
 
     const getEmpleado = async () => {
       try {
-        const response = await fetch(`http://127.0.1:8000/api/empleados/${user.id}`, {
+        const response = await fetch(`http://127.0.1:8000/api/empleados/${user.id}/`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ const empleadoview = () => {
           const data = await response.json();
           console.log(data);
           console.log(user);
-          setClientes(data.filter(cliente => cliente.branch_id === empleado.branch_id));
+          setClientes(data.filter(cliente => cliente.branch_id === 84));
         } catch (error) {
           console.error("Error: ", error);
         }
@@ -61,7 +61,8 @@ const empleadoview = () => {
               method: 'GET',
               headers: {
                   'Content-Type': 'application/json',
-              }
+              },
+              credentials: 'include',
           });
           const data = await response.json();
           setPrestamos(data.filter(prestamo => clientes.some(cliente => cliente.customer_id === prestamo.customer_id)));
@@ -80,6 +81,7 @@ const empleadoview = () => {
         const res = await fetch(`http://localhost:3000/api/usuarios/${customer_id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
+          credentials: 'include',
           body: JSON.stringify({ saldo: nuevoSaldo }),
         }).then((res) => res.json());
       
@@ -92,6 +94,7 @@ const empleadoview = () => {
        const res2 = await fetch(`http://localhost:3000/api/prestamos/${customer_id}`,
        {
          method: 'PUT',
+         credentials: 'include',
          headers: {
            'Content-Type': 'application/json',
          },
@@ -110,6 +113,7 @@ const empleadoview = () => {
       const res = await fetch(`http://localhost:3000/api/prestamos/${customer_id}`,
       {
         method: 'PUT',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -124,7 +128,6 @@ const empleadoview = () => {
  }
 
     return (
-      
         <div className="main_content">
           <h1>Empleadoview</h1>
           <h2>Sucursal N°{user.branch_id}</h2>

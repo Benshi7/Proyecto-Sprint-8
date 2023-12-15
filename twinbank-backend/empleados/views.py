@@ -12,7 +12,7 @@ from rest_framework import permissions
 class EmpleadoViewSet(viewsets.ModelViewSet):
     queryset = Empleado.objects.all()
     serializer_class = EmpleadoSerializer
-    """permission_classes = [permissions.IsAuthenticated]"""
+    permission_classes = [permissions.IsAuthenticated]
 
 class EmpleadoList(APIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -27,7 +27,7 @@ class EmpleadoList(APIView):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors,status=400)
-    
+
 class RetrieveEmpleado(APIView):
     permission_classes = [permissions.IsAuthenticated]
     def get(self, request, employee_id, format=None):
