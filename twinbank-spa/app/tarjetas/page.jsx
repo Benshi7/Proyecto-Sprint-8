@@ -41,7 +41,7 @@ function Tarjetas() {
     "radial-gradient(circle at top left, #F36265 0%, #961276 100%)",
     // Agrega más gradientes según sea necesario
   ];
-
+ 
   return (
     <div className={styles.content}>
       <div className={styles["main-content"]}>

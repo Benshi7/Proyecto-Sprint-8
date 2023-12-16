@@ -1,0 +1,31 @@
+.loan-table {
+  max-width: 800px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+}
+
+.loan-table th,
+.loan-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.loan-table th {
+  background-color: #f2f2f2;
+}
+
+.loan-table button {
+  padding: 5px 10px;
+  margin: 2px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+}
+
+.loan-table button:hover {
+  background-color: #45a049;
+}

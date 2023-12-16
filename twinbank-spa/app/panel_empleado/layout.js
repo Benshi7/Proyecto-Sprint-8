@@ -4,7 +4,7 @@ export const metadata = {
     keywords: "empleado, prestamos, twinbank, banco, digital, dinero, transferencias, pagos, depositos, retiros, retiro, deposito, pago, transferencia, transaccion",
   }
 
-  export default function panel_empleadoLayout({ children }) {
+  export default function panelEmpleadoLayout({ children }) {
     return (
         <>
             {children}
