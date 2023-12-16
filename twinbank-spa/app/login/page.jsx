@@ -38,7 +38,8 @@ const Login = () => {
         body: JSON.stringify(credentials),
       });
       const data = await response.json();
-      const fotoUrl = data.fotoUrl || ''
+      console.log(data);
+      console.log(response);
       if (response.ok) {
         setUser({
           logged: true,
@@ -46,7 +47,8 @@ const Login = () => {
           saldo: data.saldo,
           fotoUrl: "https://i.imgur.com/Y7PJdJh.jpg",
           id: data.id,
-          esEmpleado: data.esEmpleado
+          esEmpleado: data.esEmpleado,
+          empleado_id: data.empleado_id
         });
         localStorage.setItem('isLoggedIn', true);
         localStorage.setItem('fotoUrl', data.fotoUrl);
