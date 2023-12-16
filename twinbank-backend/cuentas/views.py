@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.views.decorators.csrf import csrf_exempt
+from django.http import Http404
 
 
 def generar_iban():
@@ -59,6 +60,23 @@ class CuentaViewSet(viewsets.ModelViewSet):
         # Serializa los datos y devuelve la respuesta
         serializer = CuentaSerializer(accounts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    @action(detail=True, methods=['PUT'])
+    def update_balance(self, request, *args, **kwargs):
+        # Obten el ID de la cuenta desde los parámetros de la solicitud
+        account_id = request.query_params.get('account_id')
+
+        # Obten la cuenta basada en el ID
+        account = Cuenta.objects.get(account_id=account_id)
+
+        # Actualiza el balance de la cuenta
+        account.balance = request.data.get('balance')
+        account.save()
+
+        # Serializa los datos y devuelve la respuesta
+        serializer = CuentaSerializer(account)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
 
 class CuentaList(APIView):
     def post (self, request, format=None):
@@ -72,4 +90,29 @@ class CuentaList(APIView):
         data = Cuenta.objects.all().order_by('account_id')
         serializer = CuentaSerializer(data, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class CuentaDetail(APIView):
+    def get_object(self, pk):
+        try:
+            return Cuenta.objects.get(pk=pk)
+        except Cuenta.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        cuenta = self.get_object(pk)
+        serializer = CuentaSerializer(cuenta)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        cuenta = self.get_object(pk)
+        serializer = CuentaSerializer(cuenta, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.erros, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        cuenta = self.get_object(pk)
+        cuenta.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
  

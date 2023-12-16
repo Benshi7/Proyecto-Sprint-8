@@ -70,6 +70,7 @@ const panelEmpleado = () => {
     };
 
     const clientesSucursal = filtrarClientes();
+    console.log(clientesSucursal)
     const getPrestamos = async () => {
         try {
             const response = await fetch(`http://127.0.0.1:8000/api/prestamos/branch_loans/?branch_id=${empleado?.branch_id}`, {
@@ -102,25 +103,57 @@ const panelEmpleado = () => {
     fetchData();
   }, [empleado.branch_id])
 
-
-  const aceptarPrestamo = async (loan_id) => {
+  
+  const aceptarPrestamo = async (loan_id, customer_id, loan_total) => {
+    console.log(customer_id)
     try {
-       const res2 = await fetch(`http://127.0.0.1:8000/api/prestamos/prestamo/${loan_id}/`,
-       {
-         credentials: 'include',
-         method: 'PUT',
-         headers: {
-           'Content-Type': 'application/json',
-         },
-         body: JSON.stringify({ loan_status: 'Aceptado' }),
-       }).then((res2) => res2.json());
+      const res = await fetch(`http://127.0.0.1:8000/api/cuentas/customer_accounts/?customer_id=${customer_id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      }).then((res) => res.json());
 
-       console.log("Actualizado Prestamo");
-       console.log(loan_id)
+      console.log("Cuentas del cliente");
+      console.log(res);
+      
+      const cajaDeahorro = res.find((cuenta) => cuenta.tipo_cuenta === 1);
 
+      const res2 = await fetch(`http://127.0.0.1:8000/api/cuentas/update_balance/?account_id=${cajaDeahorro.account_id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({balance: cajaDeahorro.balance + loan_total }),
+      }).then((res2) => res2.json());
+
+      console.log("Actualizado Caja de Ahorro");
     } catch (error) {
       console.error("Error: ", error);
     }
+
+    
+
+
+     try {
+        const res2 = await fetch(`http://127.0.0.1:8000/api/prestamos/prestamo/${loan_id}/`,
+        {
+          credentials: 'include',
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ loan_status: 'Aceptado' }),
+        }).then((res2) => res2.json());
+
+        console.log("Actualizado Prestamo");
+        console.log(loan_id)
+        getPrestamos();
+     } catch (error) {
+       console.error("Error: ", error);
+     }
   }
 
   const rechazarPrestamo = async (loan_id) => {
@@ -136,7 +169,7 @@ const panelEmpleado = () => {
       }).then((res) => res.json());
 
       console.log("Actualizado Prestamo");
-
+      getPrestamos();
    } catch (error) {
      console.error("Error: ", error);
    }
@@ -183,7 +216,7 @@ const panelEmpleado = () => {
                     </div>
                     {prestamo?.loan_status === null && (
                       <div>
-                        <button style={{ backgroundColor: 'black' }} onClick={() => aceptarPrestamo(prestamo?.loan_id)}>
+                        <button style={{ backgroundColor: 'black' }} onClick={() => aceptarPrestamo(prestamo?.loan_id, prestamo?.customer, prestamo?.loan_total)}>
                           ✅
                         </button>
                         <button style={{ backgroundColor: 'black' }} onClick={() => rechazarPrestamo(prestamo?.loan_id)}>
