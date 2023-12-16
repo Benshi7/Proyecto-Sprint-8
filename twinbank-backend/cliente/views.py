@@ -43,6 +43,7 @@ def login_view(request):
                     'fotoUrl': user.fotoUrl,
                     'id': user.cliente_id,
                     'esEmpleado': user.esEmpleado,
+                    'empleado_id': user.empleado_id,
                 })
             else:
                 return JsonResponse({'error': 'Credenciales incorrectas'}, status=400)

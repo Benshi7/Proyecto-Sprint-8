@@ -47,7 +47,8 @@ const Login = () => {
           saldo: data.saldo,
           fotoUrl: "https://i.imgur.com/Y7PJdJh.jpg",
           id: data.id,
-          esEmpleado: data.esEmpleado
+          esEmpleado: data.esEmpleado,
+          empleado_id: data.empleado_id
         });
         localStorage.setItem('isLoggedIn', true);
         localStorage.setItem('fotoUrl', data.fotoUrl);

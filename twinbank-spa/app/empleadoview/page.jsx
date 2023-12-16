@@ -2,6 +2,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useUser } from "../utils/UserContext";
+import style from "./empleadoview.css";
 
 const empleadoview = () => {
 
@@ -13,7 +14,7 @@ const empleadoview = () => {
 
     const getEmpleado = async () => {
       try {
-        const response = await fetch(`http://127.0.1:8000/api/empleados/${user.id}/`, {
+        const response = await fetch(`http://127.0.1:8000/api/empleados/${user.empleado_id}/`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -28,9 +29,9 @@ const empleadoview = () => {
       }
     };
 
-    useEffect(() => {
-      getEmpleado();
-    }, []);
+    // useEffect(() => {
+    //   getEmpleado();
+    // }, []);
 
     const getClientes = async () => {
         try {
@@ -44,38 +45,61 @@ const empleadoview = () => {
           }
           );
           const data = await response.json();
-          console.log(data);
-          console.log(user);
-          setClientes(data.filter(cliente => cliente.branch_id === 84));
+          setClientes(data)
         } catch (error) {
           console.error("Error: ", error);
         }
       };
 
-    useEffect(() => {
-      getClientes();
-    }, []);
+    // useEffect(() => {
+    //   getClientes();
+    // }, []);
 
+    const filtrarClientes = () => {
+      console.log("Empleado branch id", empleado.branch_id);
+      let clientesSucursal = [];
+    
+      clientes.forEach(cliente => {
+        if (cliente.branch_id === empleado.branch_id) {
+          clientesSucursal.push(cliente);
+        }
+      });
+    
+      return clientesSucursal;
+    };
+    
+    
+    const clientesSucursal = filtrarClientes();
     const getPrestamos = async () => {
-      try {
-          const response = await fetch(`http://127.0.1:8000/api/prestamos`, {
-              method: 'GET',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              credentials: 'include',
-          });
-          const data = await response.json();
-          setPrestamos(data);
-          console.log("prestmos", data);
-      } catch (error) {
-          console.error("Error: ", error);
-      }
+      if (empleado) {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/prestamos/branch_loans/?branch_id=${empleado.branch_id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+            const data = await response.json();
+            setPrestamos(data);
+            console.log("prestmos", data);
+        } catch (error) {
+            console.error("Error: ", error);
+        }
+    }
   }
   
   useEffect(() => {
+    const fetchData = async () => {
+      await getEmpleado();
+      await getClientes();
+      // Ahora que getEmpleado y getClientes se han completado, llamamos a getPrestamos
       getPrestamos();
-  }, []);
+    };
+
+    fetchData();
+  }, []); // Sin dependencias para asegurar que se ejecute solo una vez
+
   
 
   const aceptarPrestamo = async (customer_id) => {
@@ -132,15 +156,18 @@ const empleadoview = () => {
    }
  }
 
+
+
     return (
         <div className="main_content">
           <h1>Empleadoview</h1>
           <h2>Sucursal N°{user.branch_id}</h2>
-          <h3>Cantidad de clientes en la sucursal: {clientes.length}</h3>
+          <h3>Cantidad de clientes en la sucursal: {clientesSucursal.length}</h3>
+          <h3>Clientes de la sucursal</h3>
           <div>
             <table id="ClientesTable">
               {
-              clientes?.map((cliente) => (
+              clientesSucursal?.map((cliente) => (
                     <tr>
                       <td>{cliente.customer_name}</td>
                       <td>{cliente.customer_surname}</td>
@@ -150,21 +177,27 @@ const empleadoview = () => {
                     ))}
               </table>
           </div>
-
+          <h3>Prestamos de la sucursal</h3>      
           <div>
             <table id='LoanTable'>
               {
-                prestamos.map((prestamo) => (
-                    <tr>
-                      <td>{prestamo.loan_id}</td>
-                      <td>{prestamo.loan_type}</td>
-                      <td>{prestamo.loan_date}</td>
-                      <td>{prestamo.loan_total}</td>
-                      <td>{prestamo.customer_id}</td>
-                      <td><button onClick={() => aceptarPrestamo(prestamo.cutomer_id)}>Aceptar</button></td>
-                      <td><button onClick={() => rechazarPrestamo(prestamo.customer_id)}>Rechazar</button></td>
-                    </tr>
-                ))
+                prestamos.length === 0 ? (
+                  <h3>No hay prestamos para esta sucursal</h3>
+                ) : (
+                  prestamos?.map((prestamo) => {
+                    return (
+                      <tr>
+                        <td>{prestamo.loan_id}</td>
+                        <td>{prestamo.loan_type}</td>
+                        <td>{prestamo.loan_date}</td>
+                        <td>{prestamo.loan_total}</td>
+                        <td>{prestamo.customer_id}</td>
+                        <td><button onClick={() => aceptarPrestamo(prestamo.cutomer_id)}>Aceptar</button></td>
+                        <td><button onClick={() => rechazarPrestamo(prestamo.customer_id)}>Rechazar</button></td>
+                      </tr>
+                    );
+                  })
+                )
               }
             </table>
           </div>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from shared_models.models import Prestamo
+from shared_models.models import Prestamo, Cliente
 from django.http import Http404, HttpResponse, HttpResponseBadRequest
 from .serializers import PrestamoSerializer
 from rest_framework import viewsets, permissions, status, generics
@@ -25,7 +25,23 @@ class PrestamosViewSet(viewsets.ModelViewSet):
         # Serializa los datos y devuelve la respuesta
         serializer = PrestamoSerializer(loans, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+    @action(detail=False, methods=['GET'])
+    def branch_loans(self, request, *args, **kwargs):
+            # Obtén el ID de la sucursal desde los parámetros de la solicitud
+            branch_id = request.query_params.get('branch_id')
+            
+            # Obtén los clientes de la sucursal
+            clientes = Cliente.objects.filter(branch_id=branch_id)
 
+            # Filtra los préstamos basados en los clientes
+            loans = Prestamo.objects.filter(customer_id__in=clientes)
+
+            # Serializa los datos y devuelve la respuesta
+            serializer = PrestamoSerializer(loans, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+    
 class PrestamosList(APIView):
     permission_classes = [permissions.IsAuthenticated]
     def post (self, request, format=None):
@@ -52,3 +68,5 @@ class PrestamosList(APIView):
         prestamo = self.get_object(pk)
         prestamo.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    
