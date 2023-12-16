@@ -65,7 +65,7 @@ const Sidebar = () => {
           </li>
           <li>
           {user?.esEmpleado && (
-                      <Link href="/empleadoview" className="hover_eff fontawesome">
+                      <Link href="/panel_empleado" className="hover_eff fontawesome">
                       <FontAwesomeIcon icon={faEnvelope}  className="icon_nav_list" />
                       <p>Admin</p>
                     </Link>)}

@@ -19,7 +19,7 @@ const Prestamos = () => {
     handleInterestRateChange,
     handleLoanTermChange
   } = usePrestamo()
- 
+
   const [prestamos, setPrestamos] = useState([])
 
 
