@@ -25,13 +25,12 @@ class PrestamosViewSet(viewsets.ModelViewSet):
         # Serializa los datos y devuelve la respuesta
         serializer = PrestamoSerializer(loans, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    
-    
+
     @action(detail=False, methods=['GET'])
     def branch_loans(self, request, *args, **kwargs):
             # Obtén el ID de la sucursal desde los parámetros de la solicitud
             branch_id = request.query_params.get('branch_id')
-            
+
             # Obtén los clientes de la sucursal
             clientes = Cliente.objects.filter(branch_id=branch_id)
 
@@ -41,7 +40,7 @@ class PrestamosViewSet(viewsets.ModelViewSet):
             # Serializa los datos y devuelve la respuesta
             serializer = PrestamoSerializer(loans, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
-    
+
 class PrestamosList(APIView):
     permission_classes = [permissions.IsAuthenticated]
     def post (self, request, format=None):
@@ -68,5 +67,33 @@ class PrestamosList(APIView):
         prestamo = self.get_object(pk)
         prestamo.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-    
-    
+
+class PrestamoDetail(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    def get_object(self, pk):
+        try:
+            return Prestamo.objects.get(pk=pk)
+        except Prestamo.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        prestamo = self.get_object(pk)
+        serializer = PrestamoSerializer(prestamo)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        prestamo = self.get_object(pk)
+        loan_status = request.data.get('loan_status')
+
+        if loan_status is not None:
+            prestamo.loan_status = loan_status
+            prestamo.save()
+            serializer = PrestamoSerializer(prestamo)
+            return Response(serializer.data)
+
+        return Response({'error': 'El campo loan_status no se proporcionó correctamente.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        prestamo = self.get_object(pk)
+        prestamo.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

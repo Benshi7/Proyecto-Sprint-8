@@ -64,25 +64,25 @@ const Prestamos = () => {
             <section>
                     <h2>Prestamos Adquiridos</h2>
                     <table className="calculator">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Tipo</th>
-      <th>Fecha</th>
-      <th>Total</th>
-    </tr>
-  </thead>
-  <tbody>
-    {prestamos && prestamos.map((loan) => (
-      <tr key={loan.loan_id}>
-        <td>{loan.loan_id}</td>
-        <td>{loan.loan_type}</td>
-        <td>{loan.loan_date}</td>
-        <td>${loan.loan_total}</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Tipo</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {prestamos && prestamos.map((loan) => (
+                    <tr key={loan.loan_id}>
+                      <td>{loan.loan_id}</td>
+                      <td>{loan.loan_type}</td>
+                      <td>{loan.loan_date}</td>
+                      <td>${loan.loan_total}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
                 <h2>Simulación de Prestamos</h2>
                 <p>Ingrese los números a calcular</p>
                 <br/>

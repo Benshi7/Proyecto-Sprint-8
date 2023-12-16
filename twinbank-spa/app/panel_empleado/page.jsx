@@ -103,51 +103,36 @@ const empleadoview = () => {
   }, [empleado.branch_id])
 
 
-  const aceptarPrestamo = async (customer_id) => {
+  const aceptarPrestamo = async (loan_id) => {
     try {
-        const res = await fetch(`http://localhost:3000/api/usuarios/${customer_id}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          credentials: 'include',
-          body: JSON.stringify({ saldo: nuevoSaldo }),
-          credentials: 'include',
-        }).then((res) => res.json());
-
-        console.log("Actualizado Saldo");
-      } catch (error) {
-        console.error("Error: ", error);
-      }
-
-    try {
-       const res2 = await fetch(`http://localhost:3000/api/prestamos/${customer_id}`,
+       const res2 = await fetch(`http://127.0.0.1:8000/api/prestamos/prestamo/${loan_id}/`,
        {
-         method: 'PUT',
          credentials: 'include',
+         method: 'PUT',
          headers: {
            'Content-Type': 'application/json',
          },
          body: JSON.stringify({ loan_status: 'Aceptado' }),
-         credentials: 'include',
        }).then((res2) => res2.json());
 
        console.log("Actualizado Prestamo");
+       console.log(loan_id)
 
     } catch (error) {
       console.error("Error: ", error);
     }
   }
-
-  const rechazarPrestamo = async (customer_id) => {
+ 
+  const rechazarPrestamo = async (loan_id) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/prestamos/${customer_id}`,
+      const res = await fetch(`http://127.0.0.1:8000/api/prestamos/prestamo/${loan_id}/`,
       {
-        method: 'PUT',
         credentials: 'include',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ loan_status: 'Rechazado' }),
-        credentials: 'include',
       }).then((res) => res.json());
 
       console.log("Actualizado Prestamo");
@@ -180,32 +165,40 @@ const empleadoview = () => {
           <div>
           {loadingPrestamos ? (
           <p>Cargando prestamos...</p>
-        ) : (
-          <table id="LoanTable">
-            {prestamos.length === 0 ? (
-              <h3>No hay prestamos para esta sucursal...</h3>
-            ) : (
-              prestamos?.map((prestamo) => (
-                <tr key={prestamo.loan_id}>
-                  <td>{prestamo.loan_id}</td>
-                  <td>{prestamo.loan_type}</td>
-                  <td>{prestamo.loan_date}</td>
-                  <td>{prestamo.loan_total}</td>
-                  <td>{prestamo.customer_id}</td>
-                  <td>
-                    <button onClick={() => aceptarPrestamo(prestamo.cutomer_id)}>
-                      Aceptar
-                    </button>
-                  </td>
-                  <td>
-                    <button onClick={() => rechazarPrestamo(prestamo.customer_id)}>
-                      Rechazar
-                    </button>
-                  </td>
-                </tr>
-              ))
-            )}
-          </table>
+              ) : (
+                <table id="LoanTable">
+                  {prestamos.length === 0 ? (
+                    <h3>No hay prestamos para esta sucursal...</h3>
+                  ) : (
+                    prestamos?.map((prestamo) => (
+                      <tr key={prestamo?.loan_id}>
+                        <td>{prestamo?.loan_id}</td>
+                        <td>{prestamo?.loan_type}</td>
+                        <td>{prestamo?.loan_date}</td>
+                        <td>{prestamo?.loan_total}</td>
+                        <td>{prestamo?.customer}</td>
+                        <td>
+                          {/* Estado actual */}
+                          <div>
+                            <p>Estado: {prestamo?.loan_status ? prestamo?.loan_status : 'Pendiente'} </p>
+                          </div>
+
+                          {/* Botones para aceptar o rechazar */}
+                          {prestamo?.loan_status === null && (
+                            <div>
+                              <button style={{backgroundColor: 'black'}} onClick={() => aceptarPrestamo(prestamo?.loan_id)}>
+                              ✅
+                              </button>
+                              <button style={{backgroundColor: 'black'}} onClick={() => rechazarPrestamo(prestamo?.loan_id)}>
+                              ❌
+                              </button>
+                            </div>
+                          )}
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </table>
         )}
           </div>
         </div>
