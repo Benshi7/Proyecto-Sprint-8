@@ -45,13 +45,11 @@ TwinBank is a project developed during the "Full Stack Developer" course at ITBA
    Back-end:
       ```bash
       cd twninbank-backend
-
-      ```bash
       py manage.py runserver
+      ```
 
    Front-end:
       ```bash
       cd twninbank-spa
-
-      ```bash
       node run dev
+      ```
