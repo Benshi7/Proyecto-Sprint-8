@@ -3,7 +3,7 @@
 ## Description
 TwinBank is a project developed during the "Full Stack Developer" course at ITBA University. It's a fictional online banking website with basic online banking functionalities.
 
-## Creators
+## Developers
 - [Bruno Celia](https://github.com/Benshi7)
 - [Nicolas Leonardo Chavez](https://github.com/nicochavez)
 
@@ -26,30 +26,30 @@ TwinBank is a project developed during the "Full Stack Developer" course at ITBA
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YourUsername/TwinBank.git
+   git clone https://github.com/Benshi7/twinbank
    ```
 
 
 2. Install dependencies:
    ```bash
-   cd twninbank-backend
+   cd twinbank-backend
    pip install -r requirements.txt
    ```
    
    ```bash
-   cd twninbank-spa
+   cd twinbank-spa
    npm install
    ```
 
 3. Set-up:
    Back-end:
       ```bash
-      cd twninbank-backend
+      cd twinbank-backend
       py manage.py runserver
       ```
 
    Front-end:
       ```bash
-      cd twninbank-spa
+      cd twinbank-spa
       node run dev
       ```
