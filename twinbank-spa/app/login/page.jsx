@@ -124,7 +124,7 @@ const Login = () => {
     <div className="login-body">
               <section className="form-login" >
           <Image src={logo} alt="Logo de Twin Bank"/>
-          <p id="saludo">¡Bienvenido TwinkBank!</p>
+          <p id="saludo">¡Bienvenido TwinBank!</p>
           <p id="nota">Inicia sesión para continuar</p>
           <div id="login-container">
             {showRegisterForm ? <RegisterForm onSubmit={handleRegisterSubmit} registrationType={registrationType}/> : (<form id="login-form" onSubmit={onLogin}>
